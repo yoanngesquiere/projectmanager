@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+
+{% block stylesheets %}
+	{% stylesheets 'bundles/projectmanagerschedule/css/*' output="css/compiled/calendar.css" filter="cssrewrite" %}
+	    <link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+Week : {{ week }}
+
+<div id="week_calendar">
+	<header>
+		{% for i in 0..6 %}
+		    <div class="week_calendar_header day_{{ i }}">{{ day|date_modify("+ " ~ i ~  " day")|date("d/m/y") }} </div>
+		{% endfor %}
+	</header>
+</div>
+{% endblock %}
