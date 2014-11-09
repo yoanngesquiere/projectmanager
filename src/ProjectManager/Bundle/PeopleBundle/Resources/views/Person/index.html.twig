@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+	Id | First Name | Last Name | <br />
+	{% for person in persons %}
+	    {{ person.id }} | {{ person.firstName }} | {{ person.lastName }} | 
+	    update | <a href=" {{ path('project_manager_people_delete_person', { 'id' : person.id }) }}"> delete</a><br />
+	{% endfor %}
+	<a href=" {{ path('project_manager_people_new_person') }}">Create a new person</a>
+
+{% endblock body %}
