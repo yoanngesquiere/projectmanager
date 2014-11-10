@@ -2,14 +2,18 @@ project_manager_people_homepage:
     path:     /hello/
     defaults: { _controller: ProjectManagerPeopleBundle:Default:index }
 
+project_manager_people_update_person:
+    path:     /person/update/{id}
+    defaults: { _controller: ProjectManagerPeopleBundle:Person:update }
+
 project_manager_people_new_person:
-    path:     /people/new
-    defaults: { _controller: ProjectManagerPeopleBundle:Person:new }
+    path:     /person/new
+    defaults: { _controller: ProjectManagerPeopleBundle:Person:update }
 
 project_manager_people_list_person:
-    path:     /people/list
+    path:     /person/list
     defaults: { _controller: ProjectManagerPeopleBundle:Person:index }
 
 project_manager_people_delete_person:
-    path:     /people/delete/{id}
+    path:     /person/delete/{id}
     defaults: { _controller: ProjectManagerPeopleBundle:Person:delete }

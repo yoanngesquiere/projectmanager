@@ -24,9 +24,13 @@ class PersonController extends Controller
     /**
      * @Template
      */
-    public function newAction(Request $request)
+    public function updateAction(Request $request, $id=0)
     {
     	$person = new Person();
+        if ($id != 0) {
+            $em = $this->getDoctrine()->getManager();
+            $person = $em->getRepository('ProjectManagerPeopleBundle:Person')->find($id);
+        }
 
         $form = $this->createForm(new PersonType(), $person)
             ->add('save', 'submit');
