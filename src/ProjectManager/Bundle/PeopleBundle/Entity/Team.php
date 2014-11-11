@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="person")
+ * @ORM\Table(name="team")
  */
-class Person
+class Team
 {
     /**
      * @ORM\Id
@@ -20,17 +20,12 @@ class Person
     /**
      * @ORM\Column(type="string", length=100)
      */
-    protected $first_name;
+    protected $name;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\OneToMany(targetEntity="TeamMember", mappedBy="team")
      */
-    protected $last_name;
-
-    /**
-     * @ORM\OneToMany(targetEntity="TeamMember", mappedBy="member")
-     */
-    protected $team;
+    protected $members;
 
 
     /**
@@ -58,49 +53,49 @@ class Person
     }
 
     /**
-     * Gets the value of first_name.
+     * Gets the value of name.
      *
      * @return mixed
      */
-    public function getFirstName()
+    public function getName()
     {
-        return $this->first_name;
+        return $this->name;
     }
 
     /**
-     * Sets the value of first_name.
+     * Sets the value of name.
      *
-     * @param mixed $first_name the first name
+     * @param mixed $name the name
      *
      * @return self
      */
-    public function setFirstName($first_name)
+    public function setName($name)
     {
-        $this->first_name = $first_name;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Gets the value of last_name.
+     * Gets the value of members.
      *
      * @return mixed
      */
-    public function getLastName()
+    public function getMembers()
     {
-        return $this->last_name;
+        return $this->members;
     }
 
     /**
-     * Sets the value of last_name.
+     * Sets the value of members.
      *
-     * @param mixed $last_name the last name
+     * @param mixed $members the members
      *
      * @return self
      */
-    public function setLastName($last_name)
+    public function setMembers($members)
     {
-        $this->last_name = $last_name;
+        $this->members = $members;
 
         return $this;
     }

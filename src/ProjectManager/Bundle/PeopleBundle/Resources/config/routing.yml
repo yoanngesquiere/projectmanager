@@ -1,7 +1,3 @@
-project_manager_people_homepage:
-    path:     /hello/
-    defaults: { _controller: ProjectManagerPeopleBundle:Default:index }
-
 project_manager_people_update_person:
     path:     /person/update/{id}
     defaults: { _controller: ProjectManagerPeopleBundle:Person:update }
@@ -17,3 +13,11 @@ project_manager_people_list_person:
 project_manager_people_delete_person:
     path:     /person/delete/{id}
     defaults: { _controller: ProjectManagerPeopleBundle:Person:delete }
+
+team:
+    resource: "@ProjectManagerPeopleBundle/Controller/TeamController.php"
+    type:     annotation
+
+teammember:
+    resource: "@ProjectManagerPeopleBundle/Controller/TeamMemberController.php"
+    type:     annotation
