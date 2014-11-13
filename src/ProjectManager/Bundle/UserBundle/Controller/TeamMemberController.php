@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use ProjectManager\Bundle\UserBundle\Entity\Person;
+use ProjectManager\Bundle\UserBundle\Entity\User;
 use ProjectManager\Bundle\UserBundle\Entity\Team;
 use ProjectManager\Bundle\UserBundle\Entity\TeamMember;
 use ProjectManager\Bundle\UserBundle\Entity\TeamMemberRepository;
@@ -95,7 +95,7 @@ class TeamMemberController extends Controller
     	$em = $this->getDoctrine()->getManager();
 
         $team = $em->getRepository('ProjectManagerUserBundle:Team')->find($teamId);
-        $member = $em->getRepository('ProjectManagerUserBundle:Person')->find($MemberId);
+        $member = $em->getRepository('ProjectManagerUserBundle:User')->find($MemberId);
 
         //TODO check if objects exist
 

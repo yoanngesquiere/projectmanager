@@ -1,23 +1,23 @@
-project_manager_user_update_person:
-    path:     /person/update/{id}
-    defaults: { _controller: ProjectManagerUserBundle:Person:update }
+pm_user_update_person:
+    path:     /person/{id}/update/
+    defaults: { _controller: ProjectManagerUserBundle:User:update }
 
-project_manager_user_new_person:
+pm_user_new_person:
     path:     /person/new
-    defaults: { _controller: ProjectManagerUserBundle:Person:update }
+    defaults: { _controller: ProjectManagerUserBundle:User:update }
 
-project_manager_user_list_person:
+pm_user_list_person:
     path:     /person/list
-    defaults: { _controller: ProjectManagerUserBundle:Person:index }
+    defaults: { _controller: ProjectManagerUserBundle:User:index }
 
-project_manager_user_delete_person:
-    path:     /person/delete/{id}
-    defaults: { _controller: ProjectManagerUserBundle:Person:delete }
+pm_user_delete_person:
+    path:     /person/{id}/delete/
+    defaults: { _controller: ProjectManagerUserBundle:User:delete }
 
-team:
+pm_team:
     resource: "@ProjectManagerUserBundle/Controller/TeamController.php"
     type:     annotation
 
-teammember:
+pm_teammember:
     resource: "@ProjectManagerUserBundle/Controller/TeamMemberController.php"
     type:     annotation

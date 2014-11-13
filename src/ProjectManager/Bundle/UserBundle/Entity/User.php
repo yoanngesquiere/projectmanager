@@ -6,10 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="person")
- * @ORM\Entity(repositoryClass="ProjectManager\Bundle\UserBundle\Entity\PersonRepository")
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="ProjectManager\Bundle\UserBundle\Entity\UserRepository")
  */
-class Person
+class User
 {
     /**
      * @ORM\Id

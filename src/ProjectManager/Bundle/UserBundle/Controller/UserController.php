@@ -3,12 +3,12 @@
 namespace ProjectManager\Bundle\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use ProjectManager\Bundle\UserBundle\Entity\Person;
+use ProjectManager\Bundle\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use ProjectManager\Bundle\UserBundle\Form\Type\PersonType;
+use ProjectManager\Bundle\UserBundle\Form\Type\UserType;
 
-class PersonController extends Controller
+class UserController extends Controller
 {
     /**
      * @Template
@@ -16,7 +16,7 @@ class PersonController extends Controller
     public function indexAction(Request $request)
     {
         $repository = $this->getDoctrine()
-            ->getRepository('ProjectManagerUserBundle:Person');
+            ->getRepository('ProjectManagerUserBundle:User');
         $persons = $repository->findAll();
         return array('persons' => $persons);
     }
@@ -26,13 +26,13 @@ class PersonController extends Controller
      */
     public function updateAction(Request $request, $id=0)
     {
-    	$person = new Person();
+    	$person = new User();
         if ($id != 0) {
             $em = $this->getDoctrine()->getManager();
-            $person = $em->getRepository('ProjectManagerUserBundle:Person')->find($id);
+            $person = $em->getRepository('ProjectManagerUserBundle:User')->find($id);
         }
 
-        $form = $this->createForm(new PersonType(), $person)
+        $form = $this->createForm(new UserType(), $person)
             ->add('save', 'submit');
 
         $form->handleRequest($request);
@@ -43,7 +43,7 @@ class PersonController extends Controller
 		    $em->persist($person);
 		    $em->flush();
 
-	        return $this->redirect($this->generateUrl('project_manager_user_list_person'));
+	        return $this->redirect($this->generateUrl('pm_user_list_person'));
 	    }
 
         return array(
@@ -54,9 +54,9 @@ class PersonController extends Controller
     public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $person = $em->getRepository('ProjectManagerUserBundle:Person')->find($id);
+        $person = $em->getRepository('ProjectManagerUserBundle:User')->find($id);
         $em->remove($person);
         $em->flush();
-        return $this->redirect($this->generateUrl('project_manager_user_list_person'));
+        return $this->redirect($this->generateUrl('pm_user_list_person'));
     }
 }
