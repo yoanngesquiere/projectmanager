@@ -1,0 +1,15 @@
+<h2>Team members</h2>
+<table>
+	<tr>
+		<td>User</td>
+		<td>Role</td>
+		<td>Actions</td>
+	</tr>
+
+	{% for member in members %}
+	<tr>
+	    <td>{{ member.firstName }} {{ member.lastName }}</td>
+	    <td>TODO</td>
+	    <td>Update / Delete</td>
+	{% endfor %}
+</table>

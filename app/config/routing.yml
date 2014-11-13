@@ -1,5 +1,5 @@
 project_manager_people:
-    resource: "@ProjectManagerPeopleBundle/Resources/config/routing.yml"
+    resource: "@ProjectManagerUserBundle/Resources/config/routing.yml"
     prefix:   /
 
 project_manager_schedule:
