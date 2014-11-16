@@ -1,0 +1,10 @@
+default:
+    suites:
+        default:
+            contexts: [  Behat\MinkExtension\Context\MinkContext ]
+    extensions:
+        Behat\MinkExtension:
+            base_url: http://localhost/
+            sessions:
+                first_session:
+                    goutte: ~
