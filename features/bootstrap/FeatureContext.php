@@ -9,7 +9,7 @@ use Behat\MinkExtension\Context\MinkContext;
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext implements Context, SnippetAcceptingContext
+class FeatureContext extends MinkContext implements Context, SnippetAcceptingContext
 {
     /**
      * Initializes context.
@@ -20,6 +20,24 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function __construct()
     {
-        $driver = new \Behat\Mink\Driver\GoutteDriver();
+    }
+
+    protected function unescape($value)
+    {
+        return str_replace('""', '"', $value);
+    }
+    protected function escape($value)
+    {
+        return str_replace('"', '""', $value);
+    }
+
+    /**
+     * @When /^I fill:$/
+     */
+    public function iFill(TableNode $table)
+    {
+        foreach ($table->getRowsHash() as $key => $value) {
+            $this->fillField($this->escape($key), $this->escape($value));
+        }
     }
 }

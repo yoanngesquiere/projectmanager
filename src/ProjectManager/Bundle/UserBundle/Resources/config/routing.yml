@@ -1,17 +1,17 @@
 pm_user_update_person:
-    path:     /person/{id}/update/
+    path:     /user/{id}/update/
     defaults: { _controller: ProjectManagerUserBundle:User:update }
 
 pm_user_new_person:
-    path:     /person/new
+    path:     /user/new
     defaults: { _controller: ProjectManagerUserBundle:User:update }
 
 pm_user_list_person:
-    path:     /person/list
+    path:     /user/
     defaults: { _controller: ProjectManagerUserBundle:User:index }
 
 pm_user_delete_person:
-    path:     /person/{id}/delete/
+    path:     /user/{id}/delete/
     defaults: { _controller: ProjectManagerUserBundle:User:delete }
 
 pm_team:
