@@ -1,4 +1,7 @@
 Feature: User Management
+	Scenario: Purge DB
+		Given I remove "User" with "first_name" "Behat First Name"
+
 	Scenario: User HomePage
 		Given I am on "/user"
 		Then I should see "Team Management"

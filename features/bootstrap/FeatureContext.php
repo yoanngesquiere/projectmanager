@@ -40,12 +40,23 @@ class FeatureContext extends MinkContext implements Context, KernelAwareContext
     }
 
     /**
+     * @When /^I remove "(?P<object>(?:[^"]|\\")*)" with "(?P<field>(?:[^"]|\\")*)" "(?P<value>(?:[^"]|\\")*)"$/
+     */
+    public function iRemoveObject($object, $field, $value)
+    {
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $entities = $em->getRepository('ProjectManagerUserBundle:'.$object)->findBy(array($field => $value));
+        foreach ($entities as $key => $entity) {
+            $em->remove($entity);
+            $em->flush();
+        }
+    }
+
+    /**
      * @When /^I fill:$/
      */
     public function iFill(TableNode $table)
     {
-        echo '%mink.base_url%';
-        //var_dump($this->getMinkParameter('base_url'));
         foreach ($table->getRowsHash() as $key => $value) {
             $this->fillField($this->escape($key), $this->escape($value));
         }
