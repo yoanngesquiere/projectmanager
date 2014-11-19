@@ -61,4 +61,22 @@ class FeatureContext extends MinkContext implements Context, KernelAwareContext
             $this->fillField($this->escape($key), $this->escape($value));
         }
     }
+
+    /**
+     * @When /^I follow "(?P<link>(?:[^"]|\\")*)" in "(?P<element>(?:[^"]|\\")*)" with element "(?P<subelement>(?:[^"]|\\")*)" "(?P<value>(?:[^"]|\\")*)"$/
+     */
+    public function iFollowLinkAfter($link, $element, $subelement, $value)
+    {
+        $session = $this->getSession();
+        $page = $session->getPage();
+        $xpath = "//".$element."[".$subelement."//text()[contains(., '". $value ."')]]//a[text()='". $link ."']";
+        $result = $session->getPage()->find(
+            'xpath',
+            $session->getSelectorsHandler()->selectorToXpath('xpath', $xpath)
+        );
+        if (null === $result) {
+            throw new \InvalidArgumentException(sprintf('Could not evaluate XPath %s', $xpath));
+        }
+        $result->click();
+    }
 }
