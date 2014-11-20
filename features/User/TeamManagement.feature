@@ -29,3 +29,22 @@ Feature: Team Management
 		And I follow "show" in "tr" with element "td" "Behat Team"
 		Then I should see "Behat Team"
 		And I should see "Back to the list"
+		
+  Scenario: User Update
+        Given I am on "/team"
+        And I follow "edit" in "tr" with element "td" "Behat Team"
+        And I fill:
+            | Name | Behat Team Edit |
+        And I press "Update"
+        And I follow "Back to the list"
+        Then I should see "Team Management"
+        And I should see "Create a new team"
+        And I should see "Behat Team Edit"
+
+    Scenario: User Deletion
+        Given I am on "/team"
+        And I follow "show" in "tr" with element "td" "Behat Team Edit"
+        And I press "Delete"
+        Then I should see "Team Management"
+        And I should see "Create a new team"
+        And I should not see "Behat Team"
