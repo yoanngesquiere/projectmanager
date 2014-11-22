@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ProjectManager\Bundle\UserBundle\Entity\Team;
 use ProjectManager\Bundle\UserBundle\Entity\TeamMember;
-use ProjectManager\Bundle\UserBundle\Form\TeamMemberType;
+use ProjectManager\Bundle\UserBundle\Form\Type\TeamMemberType;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**

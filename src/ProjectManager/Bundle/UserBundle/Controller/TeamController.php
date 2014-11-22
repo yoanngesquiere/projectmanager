@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ProjectManager\Bundle\UserBundle\Entity\Team;
-use ProjectManager\Bundle\UserBundle\Form\TeamType;
+use ProjectManager\Bundle\UserBundle\Form\Type\TeamType;
 
 /**
  * Team controller.
