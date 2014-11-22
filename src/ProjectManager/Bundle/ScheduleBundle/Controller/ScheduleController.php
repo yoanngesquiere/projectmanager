@@ -8,7 +8,6 @@ class ScheduleController extends Controller
 {
     public function indexAction()
     {
-    	//TODO use a parameter, here, monday is the first day
     	$firstDayOfWeek = 1;
 
     	$weekNumber = date("W");

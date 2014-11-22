@@ -4,13 +4,10 @@ namespace ProjectManager\Bundle\UserBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use ProjectManager\Bundle\UserBundle\Entity\User;
 use ProjectManager\Bundle\UserBundle\Entity\Team;
 use ProjectManager\Bundle\UserBundle\Entity\TeamMember;
-use ProjectManager\Bundle\UserBundle\Entity\TeamMemberRepository;
 use ProjectManager\Bundle\UserBundle\Form\TeamMemberType;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -62,7 +59,7 @@ class TeamMemberController extends Controller
     public function listNotInTeamAction($teamId)
     {
 		$teamMember = new TeamMember();
-        $form = $this->getAddMembersForm($teamId, $teamMember);
+        $form = $this->_getAddMembersForm($teamId, $teamMember);
     	return array(
             'form' => $form->createView(),
         );
@@ -73,16 +70,16 @@ class TeamMemberController extends Controller
      *
      * @Route("/{teamId}/add_members/", name="team_member_add_members")
      */
-    public function addMembersToTeam(Request $request, $teamId)
+    public function addMembersToTeamAction(Request $request, $teamId)
     {
 
 		$teamMember = new TeamMember();
-		$form = $this->getAddMembersForm($teamId, $teamMember);
+		$form = $this->_getAddMembersForm($teamId, $teamMember);
 		$form->handleRequest($request);
 		if ($form->isValid()) {
 			$data = $form->get('member')->getData();
 			foreach ($data as $key => $person) {
-				$this->addMemberToTeam($teamId, $person->getId());
+				$this->_addMemberToTeam($teamId, $person->getId());
 			}
 		} else {
 			return $this->redirect($this->generateUrl('team'));
@@ -90,14 +87,12 @@ class TeamMemberController extends Controller
 		return $this->redirect($this->generateUrl('team_edit', array('id' => $teamId)));
     }
 
-    public function addMemberToTeam($teamId, $MemberId)
+    private function _addMemberToTeam($teamId, $MemberId)
     {
     	$em = $this->getDoctrine()->getManager();
 
         $team = $em->getRepository('ProjectManagerUserBundle:Team')->find($teamId);
         $member = $em->getRepository('ProjectManagerUserBundle:User')->find($MemberId);
-
-        //TODO check if objects exist
 
         $teammember = new TeamMember();
         $teammember->setTeam($team);
@@ -108,7 +103,7 @@ class TeamMemberController extends Controller
 		    $em->flush();
     }
 
-    public function getAddMembersForm($teamId, $teamMember)
+    private function _getAddMembersForm($teamId, $teamMember)
 	{
         $form = $this->createForm(new TeamMemberType(), $teamMember, array(
             'team_id' => $teamId,

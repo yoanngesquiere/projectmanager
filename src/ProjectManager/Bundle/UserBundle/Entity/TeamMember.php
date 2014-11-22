@@ -2,9 +2,6 @@
 
 namespace ProjectManager\Bundle\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-use ProjectManager\Bundle\UserBundle\Entity\Person;
-use ProjectManager\Bundle\UserBundle\Entity\Team;
 
 /**
  * @ORM\Entity
@@ -32,8 +29,6 @@ class TeamMember
      */
     protected $member;
 
-
-    //FIXME Add protected role when roles are created;
 
     /**
      * Gets the value of id.
