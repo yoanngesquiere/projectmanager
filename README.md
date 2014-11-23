@@ -2,6 +2,7 @@ projectmanager
 ==============
 
 [![Build Status](https://travis-ci.org/yoanngesquiere/projectmanager.svg?branch=master)](https://travis-ci.org/yoanngesquiere/projectmanager)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/aac62688-139c-4b28-bab7-a1e42e623b40/mini.png)](https://insight.sensiolabs.com/projects/aac62688-139c-4b28-bab7-a1e42e623b40)
 
 My first project under Symfony2.
 
