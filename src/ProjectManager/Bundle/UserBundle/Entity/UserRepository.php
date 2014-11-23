@@ -9,7 +9,6 @@ class UserRepository extends EntityRepository
     public function createQueryForMembersNotInTeam($idTeam)
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb2 = $this->_em->createQueryBuilder();
         return $qb
             ->add('select', 'u')
             ->add('from', 'ProjectManagerUserBundle:User u')
