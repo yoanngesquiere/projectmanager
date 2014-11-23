@@ -5,7 +5,6 @@ namespace ProjectManager\Bundle\UserBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use ProjectManager\Bundle\UserBundle\Entity\TeamMemberRepository;
 
 class TeamMemberType extends AbstractType
 {

@@ -59,7 +59,7 @@ class TeamMemberController extends Controller
     public function listNotInTeamAction($teamId)
     {
 		$teamMember = new TeamMember();
-        $form = $this->_getAddMembersForm($teamId, $teamMember);
+        $form = $this->getAddMembersForm($teamId, $teamMember);
     	return array(
             'form' => $form->createView(),
         );
@@ -74,12 +74,12 @@ class TeamMemberController extends Controller
     {
 
 		$teamMember = new TeamMember();
-		$form = $this->_getAddMembersForm($teamId, $teamMember);
+		$form = $this->getAddMembersForm($teamId, $teamMember);
 		$form->handleRequest($request);
 		if ($form->isValid()) {
 			$data = $form->get('member')->getData();
 			foreach ($data as $key => $person) {
-				$this->_addMemberToTeam($teamId, $person->getId());
+				$this->addMemberToTeam($teamId, $person->getId());
 			}
 		} else {
 			return $this->redirect($this->generateUrl('team'));
@@ -87,7 +87,7 @@ class TeamMemberController extends Controller
 		return $this->redirect($this->generateUrl('team_edit', array('id' => $teamId)));
     }
 
-    private function _addMemberToTeam($teamId, $MemberId)
+    private function addMemberToTeam($teamId, $MemberId)
     {
     	$em = $this->getDoctrine()->getManager();
 
@@ -103,7 +103,7 @@ class TeamMemberController extends Controller
 		    $em->flush();
     }
 
-    private function _getAddMembersForm($teamId, $teamMember)
+    private function getAddMembersForm($teamId, $teamMember)
 	{
         $form = $this->createForm(new TeamMemberType(), $teamMember, array(
             'team_id' => $teamId,
