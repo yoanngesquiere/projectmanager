@@ -5,6 +5,7 @@ namespace ProjectManager\Bundle\UserBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ProjectManager\Bundle\UserBundle\Entity\Team;
 use ProjectManager\Bundle\UserBundle\Entity\TeamMember;
@@ -22,6 +23,7 @@ class TeamMemberController extends Controller
      * Creates a new Team entity.
      *
      * @Route("/add/{teamId}/{MemberId}/", name="team_member_add")
+     * @Method({"GET", "POST"})
      * @Template("ProjectManagerUserBundle:TeamMember:index.html.twig")
      */
     public function addMemberToTeamAction(Request $request, $teamId, $MemberId)
@@ -34,6 +36,7 @@ class TeamMemberController extends Controller
      * List members for a team
      *
      * @Route("/{teamId}/list/", name="team_member_list")
+     * @Method({"GET", "POST"})
      * @Template("ProjectManagerUserBundle:TeamMember:index.html.twig")
      */
     public function listAction($teamId){
@@ -54,6 +57,7 @@ class TeamMemberController extends Controller
      * List members that are not in a team
      *
      * @Route("/{teamId}/notInlist/", name="team_member_notInlist")
+     * @Method({"GET", "POST"})
      * @Template("ProjectManagerUserBundle:TeamMember:notInList.html.twig")
      */
     public function listNotInTeamAction($teamId)
@@ -69,6 +73,7 @@ class TeamMemberController extends Controller
      * Submit the form
      *
      * @Route("/{teamId}/add_members/", name="team_member_add_members")
+     * @Method({"GET", "POST"})
      */
     public function addMembersToTeamAction(Request $request, $teamId)
     {

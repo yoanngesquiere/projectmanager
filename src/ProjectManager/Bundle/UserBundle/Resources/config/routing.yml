@@ -1,18 +1,26 @@
 pm_user_update_person:
     path:     /user/{id}/update/
     defaults: { _controller: ProjectManagerUserBundle:User:update }
+    requirements:
+        _method:  GET|POST
 
 pm_user_new_person:
     path:     /user/new
     defaults: { _controller: ProjectManagerUserBundle:User:update }
+    requirements:
+        _method:  GET|POST
 
 pm_user_list_person:
     path:     /user/
     defaults: { _controller: ProjectManagerUserBundle:User:index }
+    requirements:
+        _method:  GET|POST
 
 pm_user_delete_person:
     path:     /user/{id}/delete/
     defaults: { _controller: ProjectManagerUserBundle:User:delete }
+    requirements:
+        _method:  GET|POST
 
 pm_team:
     resource: "@ProjectManagerUserBundle/Controller/TeamController.php"
