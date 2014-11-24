@@ -55,7 +55,7 @@ class TeamMember
     }
 
     /**
-     * Gets the value of id.
+     * Gets the team associated to the object.
      *
      * @return mixed
      */
@@ -65,7 +65,7 @@ class TeamMember
     }
 
     /**
-     * Sets the value of id.
+     * Sets the team associated to the object.
      *
      * @param mixed $id the id
      *

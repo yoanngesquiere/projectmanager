@@ -36,7 +36,7 @@ class TeamMemberController extends Controller
      * List members for a team
      *
      * @Route("/{teamId}/list/", name="team_member_list")
-     * @Method({"GET", "POST"})
+     * @Method("GET")
      * @Template("ProjectManagerUserBundle:TeamMember:index.html.twig")
      */
     public function listAction($teamId){
@@ -57,7 +57,7 @@ class TeamMemberController extends Controller
      * List members that are not in a team
      *
      * @Route("/{teamId}/notInlist/", name="team_member_notInlist")
-     * @Method({"GET", "POST"})
+     * @Method("GET")
      * @Template("ProjectManagerUserBundle:TeamMember:notInList.html.twig")
      */
     public function listNotInTeamAction($teamId)

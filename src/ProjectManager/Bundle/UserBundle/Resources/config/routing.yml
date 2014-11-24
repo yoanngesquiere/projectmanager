@@ -14,7 +14,7 @@ pm_user_list_person:
     path:     /user/
     defaults: { _controller: ProjectManagerUserBundle:User:index }
     requirements:
-        _method:  GET|POST
+        _method:  GET
 
 pm_user_delete_person:
     path:     /user/{id}/delete/
