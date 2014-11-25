@@ -19,16 +19,21 @@ class TeamMember
 
     /**
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="members")
-     * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="team_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $team;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="team")
-     * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $member;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Role", inversedBy="grantedTo")
+     * @ORM\JoinColumn(name="role_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $role;
 
     /**
      * Gets the value of id.
@@ -79,7 +84,7 @@ class TeamMember
     }
 
     /**
-     * Gets the value of id.
+     * Gets the value of member.
      *
      * @return mixed
      */
@@ -89,7 +94,7 @@ class TeamMember
     }
 
     /**
-     * Sets the value of id.
+     * Sets the value of member.
      *
      * @param mixed $id the id
      *
@@ -98,6 +103,30 @@ class TeamMember
     public function setMember($member)
     {
         $this->member = $member;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of role.
+     *
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * Sets the value of role.
+     *
+     * @param mixed $id the id
+     *
+     * @return self
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
 
         return $this;
     }

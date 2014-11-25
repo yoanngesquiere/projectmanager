@@ -10,3 +10,8 @@ security:
 
         default:
             anonymous: ~
+    encoders:
+        ProjectManager\Bundle\UserBundle\Entity\User:
+            algorithm:        sha512
+            encode-as-base64: true
+            iterations:       6
