@@ -23,7 +23,7 @@ class Role
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="TeamMember", mappedBy="grantedTo")
+     * @ORM\OneToMany(targetEntity="TeamMember", mappedBy="role")
      */
     protected $grantedTo;
 

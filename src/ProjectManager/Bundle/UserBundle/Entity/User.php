@@ -39,9 +39,9 @@ class User implements UserInterface, \Serializable
     protected $email;
 
     /**
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(name="active", type="boolean")
      */
-    protected $isActive;
+    protected $active;
 
 
     /**
@@ -268,7 +268,7 @@ class User implements UserInterface, \Serializable
      *
      * @return mixed
      */
-    public function getIsActive()
+    public function isActive()
     {
         return $this->isActive;
     }
@@ -280,7 +280,7 @@ class User implements UserInterface, \Serializable
      *
      * @return self
      */
-    public function setIsActive($isActive)
+    public function setActive($isActive)
     {
         $this->isActive = $isActive;
 
