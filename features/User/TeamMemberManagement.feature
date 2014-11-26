@@ -14,7 +14,7 @@ Feature: Team Members Management
 	Scenario: User HomePage
 		Given I am on "/user"
 		Then I should see "Team Management"
-		And I should see "Create a new person"
+		And I should see "Create a new user"
 		And I should not see "Behat Member 1 For Team Members"
 		And I should not see "Behat Member 2 For Team Members"
 
@@ -25,13 +25,13 @@ Feature: Team Members Management
             | Name | Behat Team For Team Members |
         And I press "Create"
         And I am on "/user"
-        And I follow "Create a new person"
+        And I follow "Create a new user"
 		And I fill:
             | First name | Behat Member 1 For Team Members |
             | Last name | Behat Member 1 For Team Members Name |
 		And I press "Save"
 		And I am on "/user"
-        And I follow "Create a new person"
+        And I follow "Create a new user"
 		And I fill:
             | First name | Behat Member 2 For Team Members |
             | Last name | Behat Member 2 For Team Members Name |

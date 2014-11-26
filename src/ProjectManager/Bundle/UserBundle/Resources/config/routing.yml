@@ -2,8 +2,7 @@ pm_user:
     resource: "@ProjectManagerUserBundle/Resources/config/routing/user.yml"
 
 pm_team:
-    resource: "@ProjectManagerUserBundle/Controller/TeamController.php"
-    type:     annotation
+    resource: "@ProjectManagerUserBundle/Resources/config/routing/team.yml"
 
 pm_teammember:
     resource: "@ProjectManagerUserBundle/Controller/TeamMemberController.php"

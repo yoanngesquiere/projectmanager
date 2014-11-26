@@ -10,7 +10,7 @@ pm_user_new_person:
     requirements:
         _method:  GET|POST
 
-pm_user_list_person:
+pm_user_user_list:
     path:     /user/
     defaults: { _controller: ProjectManagerUserBundle:User:index }
     requirements:

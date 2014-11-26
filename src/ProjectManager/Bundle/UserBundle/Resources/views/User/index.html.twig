@@ -3,12 +3,36 @@
 {% block body %}
 	<h1>User list</h1>
 
-	Id | First Name | Last Name | <br />
-	{% for person in persons %}
-	    {{ person.id }} | {{ person.firstName }} | {{ person.lastName }} | 
-	    <a href="{{ path('pm_user_update_person', { 'id' : person.id }) }}">update</a> 
-	    | <a href="{{ path('pm_user_delete_person', { 'id' : person.id }) }}"> delete</a><br />
-	{% endfor %}
-	<a href=" {{ path('pm_user_new_person') }}">Create a new person</a>
+	<table class="records_list table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+		{% for user in persons %}
+        	<tr name="user_{{ user.id }}">
+                <td>
+	    			{{ user.id }} 
+	    		</td>
+	    		<td>
+	    			{{ user.firstName }}
+	    		</td>
+	    		<td>
+	    			{{ user.lastName }}
+	    		</td>
+	    		<td>
+	    			<a class="btn btn-primary" href="{{ path('pm_user_update_person', { 'id' : user.id }) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update</a> 
+	    			<a class="btn btn-primary" href="{{ path('pm_user_delete_person', { 'id' : user.id }) }}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>
+	    		</td>
+	    	</tr>
+		{% endfor %}
+		</tbody>
+    </table>
+
+  		<a class="btn btn-primary" href=" {{ path('pm_user_new_person') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create a new user</a>
 
 {% endblock body %}

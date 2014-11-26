@@ -49,7 +49,7 @@ class UserController extends Controller
 		    $em->persist($person);
 		    $em->flush();
 
-	        return $this->redirect($this->generateUrl('pm_user_list_person'));
+	        return $this->redirect($this->generateUrl('pm_user_user_list'));
 	    }
 
         return array(
@@ -63,6 +63,6 @@ class UserController extends Controller
         $person = $em->getRepository('ProjectManagerUserBundle:User')->find($id);
         $em->remove($person);
         $em->flush();
-        return $this->redirect($this->generateUrl('pm_user_list_person'));
+        return $this->redirect($this->generateUrl('pm_user_user_list'));
     }
 }

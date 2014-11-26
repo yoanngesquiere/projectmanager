@@ -4,8 +4,6 @@ namespace ProjectManager\Bundle\UserBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ProjectManager\Bundle\UserBundle\Entity\Team;
 use ProjectManager\Bundle\UserBundle\Form\Type\TeamType;
@@ -13,7 +11,6 @@ use ProjectManager\Bundle\UserBundle\Form\Type\TeamType;
 /**
  * Team controller.
  *
- * @Route("/team")
  */
 class TeamController extends Controller
 {
@@ -21,8 +18,6 @@ class TeamController extends Controller
     /**
      * Lists all Team entities.
      *
-     * @Route("/", name="team")
-     * @Method("GET")
      * @Template()
      */
     public function indexAction()
@@ -38,8 +33,6 @@ class TeamController extends Controller
     /**
      * Creates a new Team entity.
      *
-     * @Route("/", name="team_create")
-     * @Method("POST")
      * @Template("ProjectManagerUserBundle:Team:new.html.twig")
      */
     public function createAction(Request $request)
@@ -53,7 +46,7 @@ class TeamController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('team_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('pm_user_team_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -72,7 +65,7 @@ class TeamController extends Controller
     private function createCreateForm(Team $entity)
     {
         $form = $this->createForm(new TeamType(), $entity, array(
-            'action' => $this->generateUrl('team_create'),
+            'action' => $this->generateUrl('pm_user_team_create'),
             'method' => 'POST',
         ));
 
@@ -84,8 +77,6 @@ class TeamController extends Controller
     /**
      * Displays a form to create a new Team entity.
      *
-     * @Route("/new", name="team_new")
-     * @Method("GET")
      * @Template()
      */
     public function newAction()
@@ -102,8 +93,6 @@ class TeamController extends Controller
     /**
      * Finds and displays a Team entity.
      *
-     * @Route("/{id}", name="team_show")
-     * @Method("GET")
      * @Template()
      */
     public function showAction($id)
@@ -127,8 +116,6 @@ class TeamController extends Controller
     /**
      * Displays a form to edit an existing Team entity.
      *
-     * @Route("/{id}/edit", name="team_edit")
-     * @Method("GET")
      * @Template()
      */
     public function editAction($id)
@@ -161,7 +148,7 @@ class TeamController extends Controller
     private function createEditForm(Team $entity)
     {
         $form = $this->createForm(new TeamType(), $entity, array(
-            'action' => $this->generateUrl('team_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('pm_user_team_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -174,8 +161,6 @@ class TeamController extends Controller
     /**
      * Edits an existing Team entity.
      *
-     * @Route("/{id}", name="team_update")
-     * @Method("PUT")
      * @Template("ProjectManagerUserBundle:Team:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -195,7 +180,7 @@ class TeamController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('team_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('pm_user_team_edit', array('id' => $id)));
         }
 
         return array(
@@ -207,8 +192,6 @@ class TeamController extends Controller
     /**
      * Deletes a Team entity.
      *
-     * @Route("/{id}", name="team_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {
@@ -227,7 +210,7 @@ class TeamController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('team'));
+        return $this->redirect($this->generateUrl('pm_user_team_list'));
     }
 
     /**
@@ -240,7 +223,7 @@ class TeamController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('team_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('pm_user_team_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

@@ -1,0 +1,41 @@
+pm_user_team_list:
+    path:     /team/
+    defaults: { _controller: ProjectManagerUserBundle:Team:index }
+    requirements:
+        _method:  GET
+
+pm_user_team_new:
+    path:     /team/new/
+    defaults: { _controller: ProjectManagerUserBundle:Team:new }
+    requirements:
+        _method:  GET
+
+pm_user_team_create:
+    path:     /team/
+    defaults: { _controller: ProjectManagerUserBundle:Team:create }
+    requirements:
+        _method:  POST
+
+pm_user_team_show:
+    path:     /team/{id}/
+    defaults: { _controller: ProjectManagerUserBundle:Team:show }
+    requirements:
+        _method:  GET
+
+pm_user_team_edit:
+    path:     /team/{id}/edit/
+    defaults: { _controller: ProjectManagerUserBundle:Team:edit }
+    requirements:
+        _method:  GET
+
+pm_user_team_update:
+    path:     /team/{id}/
+    defaults: { _controller: ProjectManagerUserBundle:Team:update }
+    requirements:
+        _method:  PUT
+
+pm_user_team_delete:
+    path:     /team/{id}/
+    defaults: { _controller: ProjectManagerUserBundle:Team:delete }
+    requirements:
+        _method:  DELETE
