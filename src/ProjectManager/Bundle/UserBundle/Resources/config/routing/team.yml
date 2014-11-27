@@ -39,3 +39,21 @@ pm_user_team_delete:
     defaults: { _controller: ProjectManagerUserBundle:Team:delete }
     requirements:
         _method:  DELETE
+
+pm_user_teammember_list:
+    path:     /teammember/{teamId}/list/
+    defaults: { _controller: ProjectManagerUserBundle:TeamMember:list }
+    requirements:
+        _method:  GET|POST
+
+pm_user_teammember_list_not_in_team:
+    path:     /teammember/{teamId}/notInlist/
+    defaults: { _controller: ProjectManagerUserBundle:TeamMember:listNotInTeam }
+    requirements:
+        _method:  GET
+
+pm_user_teammember_team_member_add_members:
+    path:     /teammember/{teamId}/add_members/
+    defaults: { _controller: ProjectManagerUserBundle:TeamMember:addMembersToTeam }
+    requirements:
+        _method:  GET|POST

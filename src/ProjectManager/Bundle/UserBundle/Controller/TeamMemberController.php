@@ -19,24 +19,10 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class TeamMemberController extends Controller
 {
-	/**
-     * Creates a new Team entity.
-     *
-     * @Route("/add/{teamId}/{MemberId}/", name="team_member_add")
-     * @Method({"GET", "POST"})
-     * @Template("ProjectManagerUserBundle:TeamMember:index.html.twig")
-     */
-    public function addMemberToTeamAction(Request $request, $teamId, $MemberId)
-    {
-        $this->addMemberToTeam($teamId, $MemberId);
-		return $this->redirect($this->generateUrl('team'));
-    }
 
 	/**
      * List members for a team
      *
-     * @Route("/{teamId}/list/", name="team_member_list")
-     * @Method("GET")
      * @Template("ProjectManagerUserBundle:TeamMember:index.html.twig")
      */
     public function listAction($teamId){
@@ -55,9 +41,7 @@ class TeamMemberController extends Controller
 
     /**
      * List members that are not in a team
-     *
-     * @Route("/{teamId}/notInlist/", name="team_member_notInlist")
-     * @Method("GET")
+     * 
      * @Template("ProjectManagerUserBundle:TeamMember:notInList.html.twig")
      */
     public function listNotInTeamAction($teamId)
@@ -71,9 +55,6 @@ class TeamMemberController extends Controller
 
 	/**
      * Submit the form
-     *
-     * @Route("/{teamId}/add_members/", name="team_member_add_members")
-     * @Method({"GET", "POST"})
      */
     public function addMembersToTeamAction(Request $request, $teamId)
     {
@@ -87,9 +68,9 @@ class TeamMemberController extends Controller
 				$this->addMemberToTeam($teamId, $person->getId());
 			}
 		} else {
-			return $this->redirect($this->generateUrl('team'));
+			return $this->redirect($this->generateUrl('pm_user_team_list'));
 		}
-		return $this->redirect($this->generateUrl('team_edit', array('id' => $teamId)));
+		return $this->redirect($this->generateUrl('pm_user_team_edit', array('id' => $teamId)));
     }
 
     private function addMemberToTeam($teamId, $MemberId)
@@ -112,7 +93,7 @@ class TeamMemberController extends Controller
 	{
         $form = $this->createForm(new TeamMemberType(), $teamMember, array(
             'team_id' => $teamId,
-            'action' => $this->generateUrl('team_member_add_members', array('teamId' => $teamId)),
+            'action' => $this->generateUrl('pm_user_teammember_team_member_add_members', array('teamId' => $teamId)),
             'method' => 'POST',
         ));
         $form->add('submit', 'submit', array('label' => 'Add'));

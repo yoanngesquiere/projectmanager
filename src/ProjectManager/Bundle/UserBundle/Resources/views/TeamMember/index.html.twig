@@ -1,15 +1,19 @@
 <h2>Team members</h2>
-<table>
-	<tr>
-		<td>User</td>
-		<td>Role</td>
-		<td>Actions</td>
-	</tr>
-
-	{% for member in members %}
-	<tr>
-	    <td>{{ member.firstName }} {{ member.lastName }}</td>
-	    <td>TODO</td>
-	    <td>Update / Delete</td>
-	{% endfor %}
+<table class="records_list table table-striped">
+	<thead>
+		<tr>
+			<th>User</th>
+			<th>Role</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for member in members %}
+		<tr>
+		    <td>{{ member.firstName }} {{ member.lastName }}</td>
+		    <td>TODO</td>
+		    <td>Update / Delete</td>
+		{% endfor %}
+		</tr>
+	</tbody>
 </table>
