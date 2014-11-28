@@ -1,0 +1,5 @@
+pm_project:
+    resource: "@ProjectManagerProjectBundle/Resources/config/routing/project.yml"
+
+pm_task:
+    resource: "@ProjectManagerProjectBundle/Resources/config/routing/task.yml"

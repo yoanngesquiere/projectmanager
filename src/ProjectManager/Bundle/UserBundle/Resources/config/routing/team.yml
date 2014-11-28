@@ -44,7 +44,7 @@ pm_user_teammember_list:
     path:     /teammember/{teamId}/list/
     defaults: { _controller: ProjectManagerUserBundle:TeamMember:list }
     requirements:
-        _method:  GET|POST
+        _method:  GET
 
 pm_user_teammember_list_not_in_team:
     path:     /teammember/{teamId}/notInlist/

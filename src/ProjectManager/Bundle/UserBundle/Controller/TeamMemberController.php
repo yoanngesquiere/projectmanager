@@ -4,8 +4,6 @@ namespace ProjectManager\Bundle\UserBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ProjectManager\Bundle\UserBundle\Entity\Team;
 use ProjectManager\Bundle\UserBundle\Entity\TeamMember;
@@ -15,7 +13,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Team controller.
  *
- * @Route("/teammember")
  */
 class TeamMemberController extends Controller
 {

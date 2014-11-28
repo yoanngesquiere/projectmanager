@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new ProjectManager\Bundle\ScheduleBundle\ProjectManagerScheduleBundle(),
             new ProjectManager\Bundle\UserBundle\ProjectManagerUserBundle(),
+            new ProjectManager\Bundle\ProjectBundle\ProjectManagerProjectBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
