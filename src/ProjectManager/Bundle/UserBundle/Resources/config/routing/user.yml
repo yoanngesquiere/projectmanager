@@ -20,4 +20,4 @@ pm_user_delete_person:
     path:     /user/{id}/delete/
     defaults: { _controller: ProjectManagerUserBundle:User:delete }
     requirements:
-        _method:  GET|POST
+        _method:  DELETE

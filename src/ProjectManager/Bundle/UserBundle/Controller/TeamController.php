@@ -225,7 +225,10 @@ class TeamController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('pm_user_team_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array(
+                    'label' => 'Delete',
+                )
+            )
             ->getForm()
         ;
     }

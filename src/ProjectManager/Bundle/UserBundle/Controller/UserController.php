@@ -2,6 +2,7 @@
 
 namespace ProjectManager\Bundle\UserBundle\Controller;
 
+use ProjectManager\Bundle\CoreBundle\Forms\FormCreator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use ProjectManager\Bundle\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,14 +12,34 @@ use ProjectManager\Bundle\UserBundle\Form\Type\UserType;
 class UserController extends Controller
 {
     /**
+     * Lists the users
+     *
      * @Template
+     * @param Request $request
+     * @return array
      */
     public function indexAction(Request $request)
     {
         $repository = $this->getDoctrine()
             ->getRepository('ProjectManagerUserBundle:User');
         $persons = $repository->findAll();
-        return array('persons' => $persons);
+
+        $deleteForms = array();
+        $formCreator = new FormCreator($this->container);
+
+        foreach ($persons as $person) {
+            $deleteForms[$person->getId()] = $formCreator->deleteFormCreator(
+                $this->generateUrl(
+                    'pm_user_delete_person',
+                    array('id' => $person->getId())
+                )
+            )->createView();
+        }
+
+        return array(
+            'persons' => $persons,
+            'delete_form' => $deleteForms,
+        );
     }
 
     /**
@@ -65,4 +86,5 @@ class UserController extends Controller
         $em->flush();
         return $this->redirect($this->generateUrl('pm_user_user_list'));
     }
+
 }

@@ -1,0 +1,23 @@
+pm_user_role_update:
+    path:     /role/{id}/update/
+    defaults: { _controller: ProjectManagerUserBundle:Role:update }
+    requirements:
+        _method:  GET|POST
+
+pm_user_role_add:
+    path:     /role/new
+    defaults: { _controller: ProjectManagerUserBundle:Role:update }
+    requirements:
+        _method:  GET|POST
+
+pm_user_role_list:
+    path:     /role/
+    defaults: { _controller: ProjectManagerUserBundle:Role:index }
+    requirements:
+        _method:  GET
+
+pm_user_role_delete:
+    path:     /role/{id}/delete/
+    defaults: { _controller: ProjectManagerUserBundle:Role:delete }
+    requirements:
+        _method:  DELETE

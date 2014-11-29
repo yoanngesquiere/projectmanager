@@ -1,0 +1,25 @@
+{% extends 'form_div_layout.html.twig' %}
+
+
+{% block remove_button_widget -%}
+    {% if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+            '%name%': name,
+            '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
+        <span class="glyphicon {{ glyphicon }}" aria-hidden="true"></span>
+        {{ label|trans({}, translation_domain) }}</button>
+{%- endblock remove_button_widget %}
+
+{% block _delete_object_submit_widget -%}
+    {% set type = type|default('submit') %}
+    {% set glyphicon = 'glyphicon-remove' %}
+    {{- block('remove_button_widget') -}}
+{%- endblock _delete_object_submit_widget %}
