@@ -30,15 +30,27 @@ class UserController extends Controller
         foreach ($persons as $person) {
             $deleteForms[$person->getId()] = $formCreator->deleteFormCreator(
                 $this->generateUrl(
-                    'pm_user_delete_person',
+                    'pm_user_user_delete',
+                    array('id' => $person->getId())
+                )
+            )->createView();
+
+            $editForms[$person->getId()] = $formCreator->editFormCreator(
+                $this->generateUrl(
+                    'pm_user_user_edit',
                     array('id' => $person->getId())
                 )
             )->createView();
         }
+        $newForm = $formCreator->newFormCreator(
+            $this->generateUrl('pm_user_user_add'), 'user'
+        )->createView();
 
         return array(
             'persons' => $persons,
-            'delete_form' => $deleteForms,
+            'delete_forms' => $deleteForms,
+            'edit_forms' => $editForms,
+            'new_form' => $newForm,
         );
     }
 

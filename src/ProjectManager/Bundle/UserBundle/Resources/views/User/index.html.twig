@@ -25,15 +25,17 @@
 	    			{{ user.lastName }}
 	    		</td>
 	    		<td>
-                    {% form_theme delete_form[user.id] ':Forms:fields.html.twig' %}
-	    			<a class="btn btn-primary" href="{{ path('pm_user_update_person', { 'id' : user.id }) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update</a>
-                    {{ form(delete_form[user.id]) }}
+                    {% form_theme delete_forms[user.id] ':Forms:fields.html.twig' %}
+	    			{{ form(delete_forms[user.id]) }}
+                    {% form_theme edit_forms[user.id] ':Forms:fields.html.twig' %}
+                    {{ form(edit_forms[user.id]) }}
                 </td>
 	    	</tr>
 		{% endfor %}
 		</tbody>
     </table>
 
-  		<a class="btn btn-primary" href=" {{ path('pm_user_new_person') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create a new user</a>
+    {% form_theme new_form ':Forms:fields.html.twig' %}
+    {{ form(new_form) }}
 
 {% endblock body %}

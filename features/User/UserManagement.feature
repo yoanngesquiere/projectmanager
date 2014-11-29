@@ -5,20 +5,20 @@ Feature: User Management
 	Scenario: User HomePage
 		Given I am on "/user"
 		Then I should see "Team Management"
-		And I should see "Create a new user"
+		And I should see "New user"
 		And I should not see "Behat First Name"
 		And I should not see "Behat Last Name"
 
 	Scenario: User Creation Page
 		Given I am on "/user"
-		And I follow "Create a new user"
+		And I press "New user"
 		Then I should see "First name"
 		And I should see "Last name"
 		And I should see "Save"
 
 	Scenario: User Creation
 		Given I am on "/user"
-		And I follow "Create a new user"
+		And I press "New user"
 		And I fill:
             | First name | Behat First Name  |
             | Last name  | Behat Last Name   |
@@ -28,4 +28,4 @@ Feature: User Management
 		And I press "Save"
 		Then I should see "Behat First Name"
 		And I should see "Behat Last Name"
-		And I should see "Create a new user"
+		And I should see "New user"
