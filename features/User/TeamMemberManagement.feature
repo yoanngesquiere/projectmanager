@@ -25,13 +25,13 @@ Feature: Team Members Management
             | Name | Behat Team For Team Members |
         And I press "Create"
         And I am on "/user"
-        And I press "New user"
+        And I follow "New user"
 		And I fill:
             | First name | Behat Member 1 For Team Members |
             | Last name | Behat Member 1 For Team Members Name |
 		And I press "Save"
 		And I am on "/user"
-        And I press "New user"
+        And I follow "New user"
 		And I fill:
             | First name | Behat Member 2 For Team Members |
             | Last name | Behat Member 2 For Team Members Name |

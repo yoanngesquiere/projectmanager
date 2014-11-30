@@ -11,14 +11,14 @@ Feature: User Management
 
 	Scenario: User Creation Page
 		Given I am on "/user"
-		And I press "New user"
+		And I follow "New user"
 		Then I should see "First name"
 		And I should see "Last name"
 		And I should see "Save"
 
 	Scenario: User Creation
 		Given I am on "/user"
-		And I press "New user"
+		And I follow "New user"
 		And I fill:
             | First name | Behat First Name  |
             | Last name  | Behat Last Name   |

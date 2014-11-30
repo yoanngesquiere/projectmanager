@@ -2,9 +2,11 @@
 
 namespace ProjectManager\Bundle\UserBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use ProjectManager\Bundle\CoreBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use ProjectManager\Bundle\CoreBundle\Forms\FormCreator;
 
-class RoleController extends Controller {
+class RoleController extends AbstractController {
 
     /**
      * Lists all the roles in the application
@@ -13,12 +15,13 @@ class RoleController extends Controller {
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $roles = $this->getRepository('ProjectManagerUserBundle:Role')->findAll();
 
-        $roles = $em->getRepository('ProjectManagerUserBundle:Role')->findAll();
+        $forms = $this->createDeleteFormsForList($roles, 'pm_user_role');
 
         return array(
             'roles' => $roles,
+            'delete_forms' => $forms['delete_forms'],
         );
     }
 

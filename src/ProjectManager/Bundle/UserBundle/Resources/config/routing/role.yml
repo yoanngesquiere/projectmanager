@@ -17,7 +17,7 @@ pm_user_role_list:
         _method:  GET
 
 pm_user_role_delete:
-    path:     /role/{id}/delete/
+    path:     /role/{id}
     defaults: { _controller: ProjectManagerUserBundle:Role:delete }
     requirements:
         _method:  DELETE

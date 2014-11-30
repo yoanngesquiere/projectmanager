@@ -23,15 +23,3 @@
     {% set glyphicon = 'glyphicon-remove' %}
     {{- block('glyphicon_button_widget') -}}
 {%- endblock _delete_object_submit_widget %}
-
-{% block _edit_object_submit_widget -%}
-    {% set type = type|default('submit') %}
-    {% set glyphicon = 'glyphicon-edit' %}
-    {{- block('glyphicon_button_widget') -}}
-{%- endblock _edit_object_submit_widget %}
-
-{% block _new_object_submit_widget -%}
-    {% set type = type|default('submit') %}
-    {% set glyphicon = 'glyphicon-plus' %}
-    {{- block('glyphicon_button_widget') -}}
-{%- endblock _new_object_submit_widget %}

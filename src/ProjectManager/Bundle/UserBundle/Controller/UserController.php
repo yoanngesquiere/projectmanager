@@ -2,55 +2,33 @@
 
 namespace ProjectManager\Bundle\UserBundle\Controller;
 
-use ProjectManager\Bundle\CoreBundle\Forms\FormCreator;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use ProjectManager\Bundle\CoreBundle\Controller\AbstractController;
 use ProjectManager\Bundle\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ProjectManager\Bundle\UserBundle\Form\Type\UserType;
 
-class UserController extends Controller
+class UserController extends AbstractController
 {
+    const REPOSITORY_NAME = 'ProjectManagerUserBundle:User';
+    const BASE_URL = 'pm_user_user';
+
     /**
      * Lists the users
      *
      * @Template
-     * @param Request $request
      * @return array
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        $repository = $this->getDoctrine()
-            ->getRepository('ProjectManagerUserBundle:User');
+        $repository = $this->getRepository(self::REPOSITORY_NAME);
         $persons = $repository->findAll();
 
-        $deleteForms = array();
-        $formCreator = new FormCreator($this->container);
-
-        foreach ($persons as $person) {
-            $deleteForms[$person->getId()] = $formCreator->deleteFormCreator(
-                $this->generateUrl(
-                    'pm_user_user_delete',
-                    array('id' => $person->getId())
-                )
-            )->createView();
-
-            $editForms[$person->getId()] = $formCreator->editFormCreator(
-                $this->generateUrl(
-                    'pm_user_user_edit',
-                    array('id' => $person->getId())
-                )
-            )->createView();
-        }
-        $newForm = $formCreator->newFormCreator(
-            $this->generateUrl('pm_user_user_add'), 'user'
-        )->createView();
+        $forms = $this->createDeleteFormsForList($persons, self::BASE_URL);
 
         return array(
             'persons' => $persons,
-            'delete_forms' => $deleteForms,
-            'edit_forms' => $editForms,
-            'new_form' => $newForm,
+            'delete_forms' => $forms['delete_forms'],
         );
     }
 
@@ -61,8 +39,7 @@ class UserController extends Controller
     {
     	$person = new User();
         if ($id != 0) {
-            $em = $this->getDoctrine()->getManager();
-            $person = $em->getRepository('ProjectManagerUserBundle:User')->find($id);
+            $person = $this->getRepository(self::REPOSITORY_NAME)->find($id);
         }
 
         $form = $this->createForm(new UserType(), $person, array('user_exists' => ($id > 0)))
@@ -82,7 +59,7 @@ class UserController extends Controller
 		    $em->persist($person);
 		    $em->flush();
 
-	        return $this->redirect($this->generateUrl('pm_user_user_list'));
+	        return $this->redirect($this->generateUrl(self::BASE_URL.'_list'));
 	    }
 
         return array(
@@ -93,10 +70,10 @@ class UserController extends Controller
     public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $person = $em->getRepository('ProjectManagerUserBundle:User')->find($id);
+        $person = $em->getRepository(self::REPOSITORY_NAME)->find($id);
         $em->remove($person);
         $em->flush();
-        return $this->redirect($this->generateUrl('pm_user_user_list'));
+        return $this->redirect($this->generateUrl(self::BASE_URL.'_list'));
     }
 
 }

@@ -4,3 +4,6 @@ pm_user:
 pm_team:
     resource: "@ProjectManagerUserBundle/Resources/config/routing/team.yml"
 
+pm_role:
+    resource: "@ProjectManagerUserBundle/Resources/config/routing/role.yml"
+

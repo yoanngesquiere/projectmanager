@@ -25,17 +25,18 @@
 	    			{{ user.lastName }}
 	    		</td>
 	    		<td>
+                    {% set path = path('pm_user_user_edit', {'id': user.id}) %}
+                    {{ include('ProjectManagerCoreBundle:Buttons:editButton.html.twig', { 'object_url': path }) }}
                     {% form_theme delete_forms[user.id] ':Forms:fields.html.twig' %}
-	    			{{ form(delete_forms[user.id]) }}
-                    {% form_theme edit_forms[user.id] ':Forms:fields.html.twig' %}
-                    {{ form(edit_forms[user.id]) }}
+                    {{ form(delete_forms[user.id]) }}
                 </td>
 	    	</tr>
 		{% endfor %}
 		</tbody>
     </table>
+    {% set path = path('pm_user_user_add') %}
+    {{ include('ProjectManagerCoreBundle:Buttons:newButton.html.twig',
+        { 'object_url': path, 'object_name': 'user' }) }}
 
-    {% form_theme new_form ':Forms:fields.html.twig' %}
-    {{ form(new_form) }}
 
 {% endblock body %}

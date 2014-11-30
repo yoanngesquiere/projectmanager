@@ -13,7 +13,7 @@
         </thead>
         <tbody>
 		{% for role in roles %}
-        	<tr name="user_{{ role.id }}">
+        	<tr name="role_{{ role.id }}">
                 <td>
 	    			{{ role.id }}
 	    		</td>
@@ -21,14 +21,16 @@
 	    			{{ role.name }}
 	    		</td>
 	    		<td>
-	    			<a class="btn btn-primary" href="{{ path('pm_user_role_update', { 'id' : role.id }) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update</a>
-	    			<a class="btn btn-primary" href="{{ path('pm_user_role_delete', { 'id' : role.id }) }}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>
+                    {% set path = path('pm_user_role_edit', {'id': role.id}) %}
+                    {{ include('ProjectManagerCoreBundle:Buttons:editButton.html.twig', { 'object_url': path }) }}
+                    {% form_theme delete_forms[role.id] ':Forms:fields.html.twig' %}
+                    {{ form(delete_forms[role.id]) }}
 	    		</td>
 	    	</tr>
 		{% endfor %}
 		</tbody>
     </table>
-
-  		<a class="btn btn-primary" href=" {{ path('pm_user_role_add') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create a new role</a>
-
+    {% set path = path('pm_user_role_add') %}
+    {{ include('ProjectManagerCoreBundle:Buttons:newButton.html.twig',
+    { 'object_url': path, 'object_name': 'role' }) }}
 {% endblock body %}

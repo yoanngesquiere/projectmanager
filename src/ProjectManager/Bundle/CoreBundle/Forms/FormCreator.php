@@ -59,7 +59,11 @@ class FormCreator {
     public function editFormCreator($url)
     {
         $defaultData = array('message' => 'Assign');
-        return $this->formFactory->createNamedBuilder('edit_object', 'form', $defaultData, array())
+        return $this->formFactory->createNamedBuilder(
+            'edit_object', 'form', $defaultData, array(
+                'csrf_protection' => false,
+                )
+            )
             ->setAction($url)
             ->setMethod('GET')
             ->add('submit', 'submit',
