@@ -2,15 +2,6 @@
 
 
 {% block glyphicon_button_widget -%}
-    {% set label_formated = label_format|replace({'%name%': name, '%id%': id,}) %}
-    {% if label is empty -%}
-        {%- if label_format is not empty -%}
-            {% set label = label_formated %}
-        {%- else -%}
-            {% set label = name|humanize %}
-        {%- endif -%}
-    {%- endif -%}
-
     <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
         <span class="glyphicon {{ glyphicon }}" aria-hidden="true"></span>
         {{ label|trans({}, translation_domain) }}</button>

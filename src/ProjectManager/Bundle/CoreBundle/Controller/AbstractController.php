@@ -18,7 +18,7 @@ class AbstractController  extends Controller
 
         $deleteForms = array();
 
-        $formCreator = new FormCreator($this->container);
+        $formCreator = new FormCreator($this->container->get('form.factory'));
 
         foreach ($entities as $entity) {
             $deleteForms[$entity->getId()] = $formCreator->deleteFormCreator(

@@ -10,23 +10,23 @@ namespace ProjectManager\Bundle\CoreBundle\Forms;
  * @package ProjectManager\Bundle\CoreBundle\Forms
  */
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class FormCreator {
 
     /**
-     * @var \Symfony\Component\Form\FormFactory
+     * @var FormFactoryInterface
      */
     private $formFactory;
 
     /**
      * Constructor
      *
-     * @param ContainerInterface $container container
+     * @param FormFactoryInterface $formFactory form factory
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(FormFactoryInterface $formFactory)
     {
-        $this->formFactory = $container->get('form.factory');
+        $this->formFactory = $formFactory;
     }
 
 
