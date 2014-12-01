@@ -1,0 +1,7 @@
+buttons:
+    new:
+        project: New project
+project:
+    list: Project list
+    id: Id
+    name: Name

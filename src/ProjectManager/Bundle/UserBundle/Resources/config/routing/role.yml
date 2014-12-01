@@ -1,12 +1,12 @@
 pm_user_role_update:
     path:     /role/{id}/update/
-    defaults: { _controller: ProjectManagerUserBundle:Role:update }
+    defaults: { _controller: ProjectManagerUserBundle:Role:edit }
     requirements:
         _method:  GET|POST
 
 pm_user_role_add:
     path:     /role/new
-    defaults: { _controller: ProjectManagerUserBundle:Role:update }
+    defaults: { _controller: ProjectManagerUserBundle:Role:edit }
     requirements:
         _method:  GET|POST
 

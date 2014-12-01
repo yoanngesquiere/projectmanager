@@ -9,6 +9,9 @@ namespace ProjectManager\Bundle\CoreBundle\Forms;
  *
  * @package ProjectManager\Bundle\CoreBundle\Forms
  */
+
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 class FormCreator {
 
     /**
@@ -19,9 +22,9 @@ class FormCreator {
     /**
      * Constructor
      *
-     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container container
+     * @param ContainerInterface $container container
      */
-    public function __construct($container)
+    public function __construct(ContainerInterface $container)
     {
         $this->formFactory = $container->get('form.factory');
     }

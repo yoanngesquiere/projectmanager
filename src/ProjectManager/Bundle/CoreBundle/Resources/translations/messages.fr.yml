@@ -2,3 +2,6 @@ buttons:
     edit: Modifier
     new:
         user: Nouvel utilisateur
+
+lists:
+    actions: Actions

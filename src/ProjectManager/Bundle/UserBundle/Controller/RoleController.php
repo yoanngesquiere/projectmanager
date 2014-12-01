@@ -4,7 +4,6 @@ namespace ProjectManager\Bundle\UserBundle\Controller;
 
 use ProjectManager\Bundle\CoreBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use ProjectManager\Bundle\CoreBundle\Forms\FormCreator;
 
 class RoleController extends AbstractController {
 

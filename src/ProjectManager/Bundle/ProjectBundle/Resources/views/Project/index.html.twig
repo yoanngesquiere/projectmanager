@@ -1,1 +1,36 @@
-Hello {{ name }}!
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'project.list'|trans }}</h1>
+
+    <table class="records_list table table-striped">
+        <thead>
+        <tr>
+            <th>{{ 'project.id'|trans }}</th>
+            <th>{{ 'project.name'|trans }}</th>
+            <th>{{ 'lists.actions'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for project in projects %}
+            <tr name="project_{{ project.id }}">
+                <td>
+                    {{ project.id }}
+                </td>
+                <td>
+                    {{ project.name }}
+                </td>
+                <td>
+                    {% set path = path('pm_project_project_edit', {'id': project.id}) %}
+                    {{ include('ProjectManagerCoreBundle:Buttons:editButton.html.twig', { 'object_url': path }) }}
+                    {% form_theme delete_forms[project.id] ':Forms:fields.html.twig' %}
+                    {{ form(delete_forms[project.id]) }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% set path = path('pm_project_project_add') %}
+    {{ include('ProjectManagerCoreBundle:Buttons:newButton.html.twig',
+    { 'object_url': path, 'object_name': 'project' }) }}
+{% endblock body %}

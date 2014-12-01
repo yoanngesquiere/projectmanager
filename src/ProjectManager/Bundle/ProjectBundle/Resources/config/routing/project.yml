@@ -1,3 +1,11 @@
-project_manager_project_homepage:
-    path:     /hello/{name}
+pm_project_project_list:
+    path:     /project
     defaults: { _controller: ProjectManagerProjectBundle:Project:index }
+    requirements:
+        _method:  GET
+
+pm_project_project_add:
+    path:     /project/new
+    defaults: { _controller: ProjectManagerProjectBundle:Project:new }
+    requirements:
+        _method:  GET|POST
