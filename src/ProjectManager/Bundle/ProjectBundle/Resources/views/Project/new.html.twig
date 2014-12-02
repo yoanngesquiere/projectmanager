@@ -1,8 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Project creation</h1>
-
+    {% block bodytitle %}
+        <h1>Project creation</h1>
+    {% endblock %}
     {{ form(form) }}
 
     <ul class="record_actions">
