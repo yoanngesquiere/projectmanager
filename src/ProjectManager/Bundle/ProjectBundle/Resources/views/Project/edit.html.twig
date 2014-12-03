@@ -3,3 +3,8 @@
 {% block bodytitle %}
     <h1>Project edition</h1>
 {% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    {% render(controller('ProjectManagerProjectBundle:Task:index', { 'projectId': project.id })) %}
+{% endblock %}

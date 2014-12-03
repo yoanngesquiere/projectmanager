@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    {% block bodytitle %}
+        <h1>Task creation for project {{ project.name }}</h1>
+    {% endblock %}
+    {{ form(form) }}
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('pm_project_project_edit', { 'id':project.id}) }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+{% endblock %}

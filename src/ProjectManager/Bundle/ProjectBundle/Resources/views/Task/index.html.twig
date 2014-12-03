@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'task.list'|trans }}</h1>
+
+    <table class="records_list table table-striped">
+        <thead>
+        <tr>
+            <th>{{ 'task.id'|trans }}</th>
+            <th>{{ 'task.name'|trans }}</th>
+            <th>{{ 'lists.actions'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            <tr name="task_{{ task.id }}">
+                <td>
+                    {{ task.id }}
+                </td>
+                <td>
+                    {{ task.name }}
+                </td>
+                <td>
+                   {## {% set path = path('pm_project_project_edit', {'id': project.id}) %}
+                    {{ include('ProjectManagerCoreBundle:Buttons:editButton.html.twig', { 'object_url': path }) }}
+                    {% form_theme delete_forms[project.id] ':Forms:fields.html.twig' %}
+                    {{ form(delete_forms[project.id]) }}#}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% set path = path('pm_project_task_add', {'projectId': project.id}) %}
+    {{ include('ProjectManagerCoreBundle:Buttons:newButton.html.twig',
+    { 'object_url': path, 'object_name': 'task' }) }}
+{% endblock body %}

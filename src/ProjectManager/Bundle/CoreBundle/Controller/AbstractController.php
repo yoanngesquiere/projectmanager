@@ -13,7 +13,7 @@ class AbstractController  extends Controller
             ->getRepository($repositoryName);
     }
 
-    protected  function createDeleteFormsForList($entities, $baseName)
+    protected  function createDeleteFormsForList($entities, $baseName, $options = array())
     {
 
         $deleteForms = array();
@@ -21,10 +21,12 @@ class AbstractController  extends Controller
         $formCreator = new FormCreator($this->container->get('form.factory'));
 
         foreach ($entities as $entity) {
+            $options['id'] = $entity->getId();
             $deleteForms[$entity->getId()] = $formCreator->deleteFormCreator(
                 $this->generateUrl(
                     $baseName.'_delete',
-                    array('id' => $entity->getId())
+                    $options
+                    //array('id' => $entity->getId())
                 )
             )->createView();
         }

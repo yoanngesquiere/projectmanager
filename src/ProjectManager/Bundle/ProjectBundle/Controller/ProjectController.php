@@ -80,6 +80,7 @@ class ProjectController extends AbstractController
 
         return array(
             'form' => $form->createView(),
+            'project' => $project,
         );
     }
 
