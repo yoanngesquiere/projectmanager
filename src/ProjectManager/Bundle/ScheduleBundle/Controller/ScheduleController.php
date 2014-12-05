@@ -2,9 +2,10 @@
 
 namespace ProjectManager\Bundle\ScheduleBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use ProjectManager\Bundle\CoreBundle\Controller\AbstractController;
+use ProjectManager\Bundle\UserBundle\Controller\UserController;
 
-class ScheduleController extends Controller
+class ScheduleController extends AbstractController
 {
     public function indexAction()
     {
@@ -21,6 +22,16 @@ class ScheduleController extends Controller
 
     	$firstDayOnCalendar = date('d.m.Y',strtotime("-".$diffWithFirstDay." days"));
 
-        return $this->render('ProjectManagerScheduleBundle:Schedule:index.html.twig', array('week' => $weekNumber, 'day' => $firstDayOnCalendar));
+        $users = $this->getRepository(UserController::REPOSITORY_NAME)->findAll();
+
+        return $this->render(
+            'ProjectManagerScheduleBundle:Schedule:index.html.twig',
+            array(
+                'week' => $weekNumber,
+                'day' => $firstDayOnCalendar,
+                'first_day' => $firstDayOfWeek,
+                'users' => $users,
+            )
+        );
     }
 }

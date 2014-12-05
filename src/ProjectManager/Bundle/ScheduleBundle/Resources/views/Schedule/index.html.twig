@@ -10,11 +10,30 @@
 {% block body %}
 Week : {{ week }}
 
-<div id="week_calendar">
+<div id="week_calendar" class="table table-striped">
 	<header>
-		{% for i in 0..6 %}
-		    <div class="week_calendar_header day_{{ i }}">{{ day|date_modify("+ " ~ i ~  " day")|date("d/m/y") }}</div>
+        <div id="users_header">
+            Users
+        </div>
+		{% for i in first_day..6 %}
+		    <div class="week_calendar_header day_{{ i }}">
+                {{ ('days.'~i)|trans }}
+                {{ day|date_modify("+ " ~ i ~  " day")|date("d/m/y") }}
+            </div>
 		{% endfor %}
+        {% for i in 0..(first_day-1) %}
+            <div class="week_calendar_header day_{{ i }}">
+                {{ ('days.'~i)|trans }}
+                {{ day|date_modify("+ " ~ i ~  " day")|date("d/m/y") }}
+            </div>
+        {% endfor %}
 	</header>
+    <section id="users">
+        {% for user in users %}
+            <div class="user_row">
+                {{ user.firstName }} {{ user.lastName }}
+            </div>
+        {% endfor %}
+    </section>
 </div>
 {% endblock %}

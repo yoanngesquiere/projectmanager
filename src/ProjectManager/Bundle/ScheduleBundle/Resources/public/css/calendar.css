@@ -1,3 +1,8 @@
 #week_calendar {
 	background-color: #DDDDFF;
+    display: table;
+}
+
+.week_calendar_header, #users_header {
+    display: table-cell;
 }
