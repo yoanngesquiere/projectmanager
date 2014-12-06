@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Session\Session;
  */
 class FeatureContext extends MinkContext implements Context, KernelAwareContext
 {
+    protected $bundle;
+
     /**
      * Initializes context.
      *
@@ -45,7 +47,7 @@ class FeatureContext extends MinkContext implements Context, KernelAwareContext
     public function iRemoveObject($object, $field, $value)
     {
         $em = $this->kernel->getContainer()->get('doctrine')->getManager();
-        $entities = $em->getRepository('ProjectManagerUserBundle:'.$object)->findBy(array($field => $value));
+        $entities = $em->getRepository($this->bundle.':'.$object)->findBy(array($field => $value));
         foreach ($entities as $key => $entity) {
             $em->remove($entity);
             $em->flush();
@@ -62,14 +64,10 @@ class FeatureContext extends MinkContext implements Context, KernelAwareContext
         }
     }
 
-    /**
-     * @When /^I follow "(?P<link>(?:[^"]|\\")*)" in "(?P<element>(?:[^"]|\\")*)" with element "(?P<subelement>(?:[^"]|\\")*)" "(?P<value>(?:[^"]|\\")*)"$/
-     */
-    public function iFollowLinkAfter($link, $element, $subelement, $value)
+    private function iFollowSomethingAfter($link, $element, $subelement, $value, $something)
     {
         $session = $this->getSession();
-        $page = $session->getPage();
-        $xpath = "//".$element."[".$subelement."//text()[contains(., '". $value ."')]]//a[text()='". $link ."']";
+        $xpath = "//".$element."[".$subelement."//text()[contains(., '". $value ."')]]//". $something ."[contains(., '". $link ."')]";
         $result = $session->getPage()->find(
             'xpath',
             $session->getSelectorsHandler()->selectorToXpath('xpath', $xpath)
@@ -77,6 +75,24 @@ class FeatureContext extends MinkContext implements Context, KernelAwareContext
         if (null === $result) {
             throw new \InvalidArgumentException(sprintf('Could not evaluate XPath %s', $xpath));
         }
+        return $result;
+    }
+
+    /**
+     * @When /^I follow "(?P<link>(?:[^"]|\\")*)" in "(?P<element>(?:[^"]|\\")*)" with element "(?P<subelement>(?:[^"]|\\")*)" "(?P<value>(?:[^"]|\\")*)"$/
+     */
+    public function iFollowLinkAfter($link, $element, $subelement, $value)
+    {
+        $result = $this->iFollowSomethingAfter($link, $element, $subelement, $value, 'a');
         $result->click();
+    }
+
+    /**
+     * @When /^I press "(?P<link>(?:[^"]|\\")*)" in "(?P<element>(?:[^"]|\\")*)" with element "(?P<subelement>(?:[^"]|\\")*)" "(?P<value>(?:[^"]|\\")*)"$/
+     */
+    public function iPressLinkAfter($link, $element, $subelement, $value)
+    {
+        $result = $this->iFollowSomethingAfter($link, $element, $subelement, $value, 'button');
+        $result->press();
     }
 }

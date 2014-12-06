@@ -1,8 +1,16 @@
 default:
     suites:
-        default:
+        project:
+            paths:
+                 - %paths.base%/features/Project
+            contexts:
+                - ProjectContext:
+                    session: '@session'
+        user:
+            paths:
+                 - %paths.base%/features/User
             contexts: 
-                - FeatureContext:
+                - UserContext:
                     session: '@session'
     extensions:
         Behat\Symfony2Extension: ~
