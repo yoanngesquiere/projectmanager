@@ -52,31 +52,31 @@ class Role
     }
 
     /**
-     * Gets the team associated to the object.
+     * Gets the role's name
      *
      * @return mixed
      */
-    public function getTeam()
+    public function getName()
     {
-        return $this->team;
+        return $this->name;
     }
 
     /**
-     * Sets the team associated to the object.
+     * Sets the role's name.
      *
      * @param mixed $id the id
      *
      * @return self
      */
-    public function setTeam($team)
+    public function setName($name)
     {
-        $this->team = $team;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Gets the value of id.
+     * Gets the users that have this role
      *
      * @return mixed
      */
@@ -86,9 +86,9 @@ class Role
     }
 
     /**
-     * Sets the value of id.
+     * Sets the users that have this role
      *
-     * @param mixed $id the id
+     * @param TeamMember $grantedTo members that have the role
      *
      * @return self
      */
