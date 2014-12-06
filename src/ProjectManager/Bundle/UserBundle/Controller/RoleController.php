@@ -7,6 +7,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class RoleController extends AbstractController {
 
+    const REPOSITORY_NAME = 'ProjectManagerUserBundle:Role';
+    const BASE_URL = 'pm_user_role';
+
     /**
      * Lists all the roles in the application
      *
@@ -26,7 +29,7 @@ class RoleController extends AbstractController {
 
     public function editAction()
     {
-
+        return $this->redirect($this->generateUrl(self::BASE_URL.'_list'));
     }
 
     public function deleteAction()

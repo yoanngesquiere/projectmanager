@@ -64,4 +64,24 @@ class TaskController extends AbstractController
             'project' => $project,
         );
     }
+
+    /**
+     * Deletes a task
+     *
+     * @param $projectId Id of the concerned project
+     * @param $id        Id of the task
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteAction($projectId, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $task = $em->getRepository(self::REPOSITORY_NAME)->find($id);
+        if ($task) {
+            $em->remove($task);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl(ProjectController::BASE_URL.'_edit', array('id' => $projectId)));
+    }
 }
