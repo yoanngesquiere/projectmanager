@@ -1,7 +1,6 @@
 buttons:
     edit: Edit
-    new:
-        user: New user
+    delete: Delete
 
 lists:
     actions: Actions

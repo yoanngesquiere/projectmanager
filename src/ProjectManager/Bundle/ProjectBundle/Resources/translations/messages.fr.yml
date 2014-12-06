@@ -1,8 +1,12 @@
 buttons:
     new:
         project: Nouveau projet
+        task: Nouvelle tâche
 project:
     list: Liste des projets
     id: Id
     name: Nom
-
+task:
+    list: Liste des tâches
+    id: Id
+    name: Nom

@@ -45,7 +45,7 @@ class FormCreator {
             ->setMethod('DELETE')
             ->add('submit', 'submit',
                 array(
-                    'label' => 'Delete',
+                    'label' => 'buttons.delete',
                     'attr' => array('class' => 'btn btn-primary'),
                 )
             )
