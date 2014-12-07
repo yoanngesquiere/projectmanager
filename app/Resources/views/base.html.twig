@@ -3,12 +3,22 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Project Manager{% endblock %}</title>
-        {% stylesheets 'bundles/projectmanagerschedule/css/*' output="css/compiled/bootstrap.css" filter="cssrewrite" %}
+        {% stylesheets
+            'bundles/projectmanagercore/css/*'
+            output="assets/css/common.css" filter="cssrewrite"
+        %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
-        {% stylesheets 'bundles/projectmanagercore/css/*' output="css/compiled/common.css" filter="cssrewrite" %}
+        {% stylesheets
+            'bundles/projectmanagercore/bootstrap/css/*'
+            output="assets/bootstrap/css/bootstrap.css" filter="cssrewrite"
+        %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
+        {% stylesheets
+            'bundles/projectmanagercore/bootstrap/fonts/glyphicons-halflings-regular.ttf'
+            output='assets/bootstrap/fonts/glyphicons-halflings-regular.ttf'
+        %}{% endstylesheets %}
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -17,6 +27,13 @@
             {% include '::nav.html.twig' %}
         {% endblock %}
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            {% javascripts
+                '@ProjectManagerCoreBundle/Resources/public/bootstrap/js/*'
+                output='assets/bootstrap/js/bootstrap.js'
+            %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
     </body>
 </html>
