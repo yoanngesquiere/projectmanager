@@ -9,31 +9,48 @@
 
 {% block body %}
 Week : {{ week }}
-
-<div id="week_calendar" class="table table-striped">
-	<header>
-        <div id="users_header">
-            Users
-        </div>
-		{% for i in first_day..6 %}
-		    <div class="week_calendar_header day_{{ i }}">
-                {{ ('days.'~i)|trans }}
-                {{ day|date_modify("+ " ~ i ~  " day")|date("d/m/y") }}
-            </div>
-		{% endfor %}
-        {% for i in 0..(first_day-1) %}
-            <div class="week_calendar_header day_{{ i }}">
-                {{ ('days.'~i)|trans }}
-                {{ day|date_modify("+ " ~ i ~  " day")|date("d/m/y") }}
-            </div>
-        {% endfor %}
-	</header>
-    <section id="users">
+<div id="content">
+    <table id="calendar" class="table table-striped">
+        <thead>
+            <tr>
+                <td class="week_calendar_header calendar_users">
+                    Users
+                </td>
+                {% for i in first_day..6 %}
+                    <td class="week_calendar_header day_{{ i }}">
+                        {{ ('days.'~i)|trans }}
+                        {{ day|date_modify("+ " ~ (i-first_day) ~  " day")|date("d/m/y") }}
+                    </td>
+                {% endfor %}
+                {% for i in 0..(first_day-1) %}
+                    <td class="week_calendar_header day_{{ i }}">
+                        {{ ('days.'~i)|trans }}
+                        {{ day|date_modify("+ " ~ (i-first_day+7) ~  " day")|date("d/m/y") }}
+                    </td>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
         {% for user in users %}
-            <div class="user_row">
-                {{ user.firstName }} {{ user.lastName }}
-            </div>
+            <tr class="user_row">
+                <td>{{ user.firstName }} {{ user.lastName }}
+                    <div>
+                        {% for task in user.assignedTasks %}
+                            {{ task.name }}
+                        {% endfor %}
+                    </div>
+                </td>
+                {% for i in first_day..6 %}
+                    <td class="week_calendar_header day_{{ i }}">
+                    </td>
+                {% endfor %}
+                {% for i in 0..(first_day-1) %}
+                    <td class="week_calendar_header day_{{ i }}">
+                    </td>
+                {% endfor %}
+            </tr>
         {% endfor %}
-    </section>
+        </tbody>
+    </table>
 </div>
 {% endblock %}

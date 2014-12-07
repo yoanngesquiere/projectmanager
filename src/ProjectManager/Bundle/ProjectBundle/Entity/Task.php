@@ -2,10 +2,10 @@
 
 namespace ProjectManager\Bundle\ProjectBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="TaskRepository")
  * @ORM\Table(name="task")
  */
 class Task
@@ -38,6 +38,89 @@ class Task
      * @ORM\OneToMany(targetEntity="Task", mappedBy="parentTask")
      */
     protected $subTasks;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $startDate;
+
+    /**
+     * @return mixed
+     */
+    public function getAssignedTo()
+    {
+        return $this->assignedTo;
+    }
+
+    /**
+     * @param mixed $assignedTo
+     */
+    public function setAssignedTo($assignedTo)
+    {
+        $this->assignedTo = $assignedTo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param mixed $endDate
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @param mixed $startDate
+     */
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $endDate;
+
+    protected $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Worker", inversedBy="assignedTasks")
+     * @ORM\JoinColumn(name="assignedTo", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $assignedTo;
+
     /**
      * Constructor
      */
