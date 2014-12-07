@@ -4,7 +4,6 @@
 /app/logs/*
 /vendor/
 /app/config/parameters.yml
-/web/css/compiled/
+/web/assets/
 /behat.yml
 /bin
-/.idea/
