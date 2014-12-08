@@ -30,4 +30,4 @@ class Worker extends User {
     {
         $this->assignedTasks = $assignedTasks;
     }
-} 
+}

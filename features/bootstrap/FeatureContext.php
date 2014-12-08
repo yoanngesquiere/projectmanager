@@ -1,7 +1,6 @@
 <?php
 
 use Behat\Behat\Context\Context;
-use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
@@ -50,7 +49,7 @@ class FeatureContext extends MinkContext implements Context, KernelAwareContext
         $entities = $em->getRepository($this->bundle.':'.$object)->findBy(array($field => $value));
         foreach ($entities as $key => $entity) {
             $em->remove($entity);
-            $em->flush();
+            $em->flush($entity);
         }
     }
 
