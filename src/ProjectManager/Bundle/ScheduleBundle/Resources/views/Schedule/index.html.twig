@@ -17,26 +17,28 @@ Week : {{ week }}
                     Users
                 </td>
                 {% for i in first_day..6 %}
-                    <td class="week_calendar_header day_{{ i }}">
+                    {% set columnDate=day|date_modify("+ " ~ (i-first_day) ~  " day") %}
+                    <td class="week_calendar_header day_{{ i }}" id="column{{ columnDate|date("ymd") }}">
                         {{ ('days.'~i)|trans }}
-                        {{ day|date_modify("+ " ~ (i-first_day) ~  " day")|date("d/m/y") }}
+                        {{ columnDate|date("d/m/y") }}
                     </td>
                 {% endfor %}
                 {% for i in 0..(first_day-1) %}
-                    <td class="week_calendar_header day_{{ i }}">
+                {% set columnDate=day|date_modify("+ " ~ (i-first_day+7) ~  " day") %}
+                    <td class="week_calendar_header day_{{ i }}" id="column{{ columnDate|date("ymd") }}">
                         {{ ('days.'~i)|trans }}
-                        {{ day|date_modify("+ " ~ (i-first_day+7) ~  " day")|date("d/m/y") }}
+                        {{ columnDate|date("d/m/y") }}
                     </td>
                 {% endfor %}
             </tr>
         </thead>
         <tbody>
         {% for user in users %}
-            <tr class="user_row">
+            <tr class="user_row" id="user_row_{{ user.id }}">
                 <td>{{ user.firstName }} {{ user.lastName }}
-                    <div>
+                    <div id="user_{{ user.id }}_tasks">
                         {% for task in user.assignedTasks %}
-                            {{ task.name }}
+                             Id:{{ task.id }};Name:{{ task.name }};start:{{ task.startDate|date("ymd") }};end:{{ task.endDate|date("ymd") }}
                         {% endfor %}
                     </div>
                 </td>
@@ -53,4 +55,14 @@ Week : {{ week }}
         </tbody>
     </table>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+    '@ProjectManagerScheduleBundle/Resources/public/js/*'
+    output='assets/bootstrap/js/calendar.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
