@@ -36,9 +36,9 @@ Week : {{ week }}
         {% for user in users %}
             <tr class="user_row" id="user_row_{{ user.id }}">
                 <td>{{ user.firstName }} {{ user.lastName }}
-                    <div id="user_{{ user.id }}_tasks">
+                    <div id="user_{{ user.id }}_tasks" class="user_tasks">
                         {% for task in user.assignedTasks %}
-                             Id:{{ task.id }};Name:{{ task.name }};start:{{ task.startDate|date("ymd") }};end:{{ task.endDate|date("ymd") }}
+                             {"id":"{{ task.id }}","name":"{{ task.name }}","start":"{{ task.startDate|date("ymd") }}","end":"{{ task.endDate|date("ymd") }}"}
                         {% endfor %}
                     </div>
                 </td>
@@ -61,7 +61,7 @@ Week : {{ week }}
     {{ parent() }}
     {% javascripts
     '@ProjectManagerScheduleBundle/Resources/public/js/*'
-    output='assets/bootstrap/js/calendar.js'
+    output='assets/js/calendar.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
