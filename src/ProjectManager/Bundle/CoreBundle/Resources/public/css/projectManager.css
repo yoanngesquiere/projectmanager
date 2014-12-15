@@ -13,3 +13,7 @@ form div div label{
 form div div input{
     display: table-cell;
 }
+
+.user_tasks {
+    display: none;
+}

@@ -43,11 +43,11 @@ Week : {{ week }}
                     </div>
                 </td>
                 {% for i in first_day..6 %}
-                    <td class="week_calendar_header day_{{ i }}">
+                    <td class="day_{{ i }}">
                     </td>
                 {% endfor %}
                 {% for i in 0..(first_day-1) %}
-                    <td class="week_calendar_header day_{{ i }}">
+                    <td class="day_{{ i }}">
                     </td>
                 {% endfor %}
             </tr>
