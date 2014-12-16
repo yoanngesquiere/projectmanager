@@ -13,8 +13,8 @@ user:
     form:
         username: Username
         password: Password
-        firstName: First Name
-        lastName: Last Name
-        email: eMail
+        firstName: First name
+        lastName: Last name
+        email: Email
 
 
