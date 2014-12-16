@@ -1,3 +1,18 @@
 buttons:
     new:
         user: Nouvel utilisateur
+        role: Nouveau rôle
+
+user:
+    id: Id
+    lastName: Nom
+    firstName: Prénom
+    actions: Actions
+    list: Liste d'utilisateurs
+    new: Nouvel utilisateur
+    form:
+        username: Nom d'utilisateur
+        password: Mot de passe
+        firstName: Prénom
+        lastName: Nom
+        email: eMail
