@@ -2,6 +2,7 @@
 
 namespace ProjectManager\Bundle\UserBundle\Controller;
 
+use ProjectManager\Bundle\CoreBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -12,8 +13,10 @@ use ProjectManager\Bundle\UserBundle\Form\Type\TeamType;
  * Team controller.
  *
  */
-class TeamController extends Controller
+class TeamController extends AbstractController
 {
+    const REPOSITORY_NAME = 'ProjectManagerUserBundle:Team';
+    const BASE_URL = 'pm_user_team';
 
     /**
      * Lists all Team entities.

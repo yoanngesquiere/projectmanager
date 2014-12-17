@@ -2,6 +2,7 @@
 
 namespace ProjectManager\Bundle\UserBundle\Controller;
 
+use ProjectManager\Bundle\CoreBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -14,15 +15,18 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Team controller.
  *
  */
-class TeamMemberController extends Controller
+class TeamMemberController extends AbstractController
 {
+
+    const REPOSITORY_NAME = 'ProjectManagerUserBundle:TeamMember';
+    const BASE_URL = 'pm_user_teammember';
 
 	/**
      * List members for a team
      *
      * @Template("ProjectManagerUserBundle:TeamMember:index.html.twig")
      */
-    public function listAction($teamId){
+    public function listAction($teamId) {
     	$members = new ArrayCollection();
         $em = $this->getDoctrine()->getManager();
 
@@ -31,9 +35,21 @@ class TeamMemberController extends Controller
             $members[] = $value->getMember();
         }
 
-    	return array(
-            'members' => $members,
+        $forms = $this->createDeleteFormsForList($results, self::BASE_URL, array('teamId' => $teamId));
+
+
+        return array(
+            'team_members' => $results,
+            'delete_forms' => $forms['delete_forms'],
         );
+    }
+
+    public function deleteAction($teamId, $id) {
+        $em = $this->getDoctrine()->getManager();
+        $teamMember = $em->getRepository(self::REPOSITORY_NAME)->find($id);
+        $em->remove($teamMember);
+        $em->flush();
+        return $this->redirect($this->generateUrl(TeamController::BASE_URL.'_edit', array('id' => $teamId)));
     }
 
     /**

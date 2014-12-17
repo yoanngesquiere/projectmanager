@@ -12,3 +12,17 @@
     {% set glyphicon = 'glyphicon-remove' %}
     {{- block('glyphicon_button_widget') -}}
 {%- endblock _delete_object_submit_widget %}
+
+
+{% block choice_widget_expanded -%}
+    <table class="records_list table table-striped" }}>
+        {%- for child in form %}
+            <tr>
+                <td>
+            {{- form_widget(child) -}}
+            {{- form_label(child) -}}
+                </td>
+            </tr>
+        {% endfor -%}
+    </table>
+{% endblock choice_widget_expanded %}

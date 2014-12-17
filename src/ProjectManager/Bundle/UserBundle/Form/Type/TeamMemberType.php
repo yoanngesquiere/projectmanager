@@ -17,7 +17,6 @@ class TeamMemberType extends AbstractType
         $builder
             ->add('member', 'entity', array(
                 'class' => 'ProjectManagerUserBundle:User',
-                'property' => 'firstName',
                 'expanded' => true,
                 'multiple' => true,
                 'query_builder' => function(\ProjectManager\Bundle\UserBundle\Entity\UserRepository $er) use ($options) {

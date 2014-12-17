@@ -8,11 +8,14 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for member in members %}
+        {% for team_member in team_members %}
 		<tr>
-		    <td>{{ member.firstName }} {{ member.lastName }}</td>
+		    <td>{{ team_member.member.firstName }} {{ team_member.member.lastName }}</td>
 		    <td>TODO</td>
-		    <td>Update / Delete</td>
+		    <td>Update /
+            {% form_theme delete_forms[team_member.id] ':Forms:fields.html.twig' %}
+            {{ form(delete_forms[team_member.id]) }}
+            </td>
 		{% endfor %}
 		</tr>
 	</tbody>
