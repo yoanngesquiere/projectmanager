@@ -29,3 +29,22 @@ Feature: User Management
 		Then I should see "Behat First Name"
 		And I should see "Behat Last Name"
 		And I should see "New user"
+
+    Scenario: User Update
+      Given I am on "/user"
+      And I follow " Edit" in "tr" with element "td" "Behat First Name"
+      And I fill:
+        | First name | Behat First Name Edit  |
+        | Last name  | Behat Last Name Edit   |
+      And I press "Save"
+      Then I should see "Behat First Name Edit"
+      And I should see "Behat Last Name Edit"
+      And I should see "New user"
+
+  Scenario: User Delete:
+    Given I am on "/user"
+    And I press "Delete" in "tr" with element "td" "Behat First Name Edit"
+    Then I should see "User list"
+    And I should see "New user"
+    And I should not see "Behat First Name Edit"
+    And I should not see "Behat Last Name Edit"
