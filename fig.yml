@@ -1,0 +1,7 @@
+web:
+  build: .
+  working_dir: /var/www
+  links:
+    - db
+db:
+  image: dockerfile/mariadb:latest
