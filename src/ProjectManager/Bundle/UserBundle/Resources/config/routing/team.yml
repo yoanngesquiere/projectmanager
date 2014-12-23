@@ -4,7 +4,7 @@ pm_user_team_list:
     requirements:
         _method:  GET
 
-pm_user_team_new:
+pm_user_team_add:
     path:     /team/new/
     defaults: { _controller: ProjectManagerUserBundle:Team:new }
     requirements:
@@ -15,12 +15,6 @@ pm_user_team_create:
     defaults: { _controller: ProjectManagerUserBundle:Team:create }
     requirements:
         _method:  POST
-
-pm_user_team_show:
-    path:     /team/{id}/
-    defaults: { _controller: ProjectManagerUserBundle:Team:show }
-    requirements:
-        _method:  GET
 
 pm_user_team_edit:
     path:     /team/{id}/edit/

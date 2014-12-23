@@ -8,7 +8,7 @@ Feature: Team Members Management
 	Scenario: Team HomePage
 		Given I am on "/team"
 		Then I should see "Team Management"
-		And I should see "Create a new team"
+		And I should see "New team"
 		And I should not see "Behat Team For Team Members"
 
 	Scenario: User HomePage
@@ -20,7 +20,7 @@ Feature: Team Members Management
 
 	Scenario: Team And User Creation
 		Given I am on "/team"
-		And I follow "Create a new team"
+		And I follow "New team"
 		And I fill:
             | Name | Behat Team For Team Members |
         And I press "Create"

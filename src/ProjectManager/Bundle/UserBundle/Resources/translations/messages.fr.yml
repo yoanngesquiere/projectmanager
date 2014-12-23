@@ -2,6 +2,7 @@ buttons:
     new:
         user: Nouvel utilisateur
         role: Nouveau rôle
+        team: Nouvelle équipe
 
 user:
     id: Id

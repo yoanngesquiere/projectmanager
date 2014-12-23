@@ -13,7 +13,7 @@ class AbstractController  extends Controller
             ->getRepository($repositoryName);
     }
 
-    protected  function createDeleteFormsForList($entities, $baseName, $options = array())
+    protected function createDeleteFormsForList($entities, $baseName, $options = array())
     {
 
         $deleteForms = array();
@@ -26,13 +26,24 @@ class AbstractController  extends Controller
                 $this->generateUrl(
                     $baseName.'_delete',
                     $options
-                    //array('id' => $entity->getId())
                 )
             )->createView();
         }
 
         return array(
             'delete_forms' => $deleteForms,
+        );
+    }
+
+    protected function createDeleteForm($entityId, $baseName, $options = array())
+    {
+        $formCreator = new FormCreator($this->container->get('form.factory'));
+        $options['id'] = $entityId;
+        return $formCreator->deleteFormCreator(
+            $this->generateUrl(
+                $baseName.'_delete',
+                $options
+            )
         );
     }
 }

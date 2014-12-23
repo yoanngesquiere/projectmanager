@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Team edit</h1>
+    <h1>Team edit : {{ team.name }}</h1>
 
     {{ form(edit_form) }}
 
@@ -11,7 +11,6 @@
             Back to the list
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
 </ul>
 {# Shows the team members #}
 {% render(controller('ProjectManagerUserBundle:TeamMember:list', { 'teamId': team.id })) %}

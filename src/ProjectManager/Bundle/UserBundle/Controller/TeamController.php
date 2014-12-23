@@ -26,10 +26,12 @@ class TeamController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ProjectManagerUserBundle:Team')->findAll();
+        $teams = $em->getRepository('ProjectManagerUserBundle:Team')->findAll();
+        $forms = $this->createDeleteFormsForList($teams, self::BASE_URL);
 
         return array(
-            'entities' => $entities,
+            'entities' => $teams,
+            'delete_forms' => $forms['delete_forms'],
         );
     }
     /**
@@ -48,7 +50,7 @@ class TeamController extends AbstractController
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('pm_user_team_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('pm_user_team_edit', array('id' => $entity->getId())));
         }
 
         return array(
@@ -93,29 +95,6 @@ class TeamController extends AbstractController
     }
 
     /**
-     * Finds and displays a Team entity.
-     *
-     * @Template()
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('ProjectManagerUserBundle:Team')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Team entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
      * Displays a form to edit an existing Team entity.
      *
      * @Template()
@@ -131,11 +110,9 @@ class TeamController extends AbstractController
         }
 
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
             'team'        => $entity,
         );
     }
@@ -175,7 +152,6 @@ class TeamController extends AbstractController
             throw $this->createNotFoundException('Unable to find Team entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
@@ -188,7 +164,6 @@ class TeamController extends AbstractController
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
     /**
@@ -197,7 +172,7 @@ class TeamController extends AbstractController
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
+        $form = $this->createDeleteForm($id, self::BASE_URL);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -215,23 +190,4 @@ class TeamController extends AbstractController
         return $this->redirect($this->generateUrl('pm_user_team_list'));
     }
 
-    /**
-     * Creates a form to delete a Team entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('pm_user_team_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array(
-                    'label' => 'Delete',
-                )
-            )
-            ->getForm()
-        ;
-    }
 }
