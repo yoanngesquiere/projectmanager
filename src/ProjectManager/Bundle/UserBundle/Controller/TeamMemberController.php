@@ -4,12 +4,10 @@ namespace ProjectManager\Bundle\UserBundle\Controller;
 
 use ProjectManager\Bundle\CoreBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ProjectManager\Bundle\UserBundle\Entity\Team;
 use ProjectManager\Bundle\UserBundle\Entity\TeamMember;
 use ProjectManager\Bundle\UserBundle\Form\Type\TeamMemberType;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Team controller.
@@ -27,13 +25,9 @@ class TeamMemberController extends AbstractController
      * @Template("ProjectManagerUserBundle:TeamMember:index.html.twig")
      */
     public function listAction($teamId) {
-    	$members = new ArrayCollection();
         $em = $this->getDoctrine()->getManager();
 
         $results = $em->getRepository('ProjectManagerUserBundle:TeamMember')->findBy(array('team'=> $teamId));
-        foreach ($results as $key => $value) {
-            $members[] = $value->getMember();
-        }
 
         $forms = $this->createDeleteFormsForList($results, self::BASE_URL, array('teamId' => $teamId));
 

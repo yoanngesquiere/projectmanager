@@ -4,7 +4,6 @@ namespace ProjectManager\Bundle\UserBundle\Controller;
 
 use ProjectManager\Bundle\CoreBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ProjectManager\Bundle\UserBundle\Entity\Team;
 use ProjectManager\Bundle\UserBundle\Form\Type\TeamType;
