@@ -57,6 +57,9 @@ function updateCalendar(checkedElementsClass, excludeColumnCriteria, columnClass
                         if (task.start <= columnsData[j] && task.end >= columnsData[j]) {
                             var td = "tr#user_row_" + userId + " td." + columnClassPrefix + j;
                             var taskLink = "<a href=\""+task.link+"\">"+task.name+"</a>";
+                            if ($(td).html().trim() != '') {
+                                taskLink = "<br />"+taskLink;
+                            }
                             $(td).html($(td).html() + taskLink);
                         }
                     }
