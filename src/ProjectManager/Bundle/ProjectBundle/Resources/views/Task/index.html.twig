@@ -21,8 +21,8 @@
                     {{ task.name }}
                 </td>
                 <td>
-                    {##{% set path = path('pm_project_task_edit', {'id': task.id, 'projectId': project.id}) %}
-                    {{ include('ProjectManagerCoreBundle:Buttons:editButton.html.twig', { 'object_url': path }) }}#}
+                    {% set path = path('pm_project_task_edit_by_project', {'taskId': task.id, 'projectId': task.project.id}) %}
+                    {{ include('ProjectManagerCoreBundle:Buttons:editButton.html.twig', { 'object_url': path }) }}
                     {% form_theme delete_forms[task.id] ':Forms:fields.html.twig' %}
                     {{ form(delete_forms[task.id]) }}
                 </td>

@@ -2,13 +2,13 @@
 
 {% block body -%}
     {% block bodytitle %}
-        <h1>{% trans with {'%project%': project.name} %}task.creationInProject{% endtrans %}</h1>
+        <h1>{% trans with {'%project%': task.project.name, '%task%': task.name} %}task.editionInProject{% endtrans %}</h1>
     {% endblock %}
     {{ form(form) }}
 
     <ul class="record_actions">
         <li>
-            <a href="{{ path('pm_project_project_edit', { 'id':project.id}) }}">
+            <a href="{{ path('pm_project_project_edit', { 'id':task.project.id}) }}">
                 Back to the list
             </a>
         </li>

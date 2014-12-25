@@ -36,13 +36,31 @@ function updateCalendar(checkedElementsClass, excludeColumnCriteria, columnClass
         //Triggers the process only when the user has at least one task for the current calendar
         if ("" != tasksContent) {
             var tasks = tasksContent.split('\n');
+            var currentTask = null;
+            var process = false;
             for (i = 0; i < tasks.length; i++) {
-                var task = JSON.parse(tasks[i]);
-                for (j = 0; j < columnsData.length; j++) {
-                    if (task.start <= columnsData[j] && task.end >= columnsData[j]) {
-                        var td = "tr#user_row_"+userId+ " td."+columnClassPrefix+j;
-                        $(td).html($(td).html()+task.name);
+                //Manage JSON entities on multiple lines
+                if (tasks[i].indexOf("{")>=0 && tasks[i].indexOf("}")>=0) {
+                    currentTask = tasks[i];
+                    process = true;
+                } else if (tasks[i].indexOf("{")>=0) {
+                    currentTask = tasks[i];
+                } else if (tasks[i].indexOf("}")>=0) {
+                    currentTask += tasks[i];
+                    process = true;
+                } else {
+                    currentTask += tasks[i];
+                }
+                if (process) {
+                    var task = JSON.parse(currentTask);
+                    for (j = 0; j < columnsData.length; j++) {
+                        if (task.start <= columnsData[j] && task.end >= columnsData[j]) {
+                            var td = "tr#user_row_" + userId + " td." + columnClassPrefix + j;
+                            var taskLink = "<a href=\""+task.link+"\">"+task.name+"</a>";
+                            $(td).html($(td).html() + taskLink);
+                        }
                     }
+                    process = false;
                 }
             }
         }

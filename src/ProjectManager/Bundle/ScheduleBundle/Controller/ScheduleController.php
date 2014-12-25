@@ -3,6 +3,7 @@
 namespace ProjectManager\Bundle\ScheduleBundle\Controller;
 
 use ProjectManager\Bundle\CoreBundle\Controller\AbstractController;
+use ProjectManager\Bundle\ProjectBundle\Entity\Worker;
 
 class ScheduleController extends AbstractController
 {
@@ -21,12 +22,14 @@ class ScheduleController extends AbstractController
 
     	$firstDayOnCalendar = date('Y-m-d',strtotime("-".$diffWithFirstDay." days"));
         $lastDayOnCalendar = date('Y-m-d',strtotime("+ 7 days", strtotime($firstDayOnCalendar)));
-        $users = $this->getRepository('ProjectManagerProjectBundle:Worker')->findAll();
+        $users = $this->getRepository('ProjectManagerUserBundle:User')->findAll();
+        $usersUpdated = array();
         foreach($users as $user)
         {
+            $user = new Worker($user);
             $user->setAssignedTasks($this->getRepository('ProjectManagerProjectBundle:Task')
                 ->getTasksForPeriod($firstDayOnCalendar, $lastDayOnCalendar, $user));
-
+            $usersUpdated[] = $user;
         }
         return $this->render(
             'ProjectManagerScheduleBundle:Schedule:index.html.twig',
@@ -34,7 +37,7 @@ class ScheduleController extends AbstractController
                 'week' => $weekNumber,
                 'day' => $firstDayOnCalendar,
                 'first_day' => $firstDayOfWeek,
-                'users' => $users,
+                'users' => $usersUpdated,
             )
         );
     }

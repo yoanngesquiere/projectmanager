@@ -25,7 +25,7 @@ class TaskType extends AbstractType
         $builder->add('assignedTo', 'entity', array(
             'empty_value' => 'user.select',
             'required'=>false,
-            'class' => 'ProjectManagerProjectBundle:Worker'
+            'class' => 'ProjectManagerUserBundle:User',
         ));
     }
 

@@ -6,7 +6,11 @@ project:
     list: Project list
     id: Id
     name: Name
+    creation: Project creation
+    edition: Edit project
 task:
     list: Task list
     id: Id
     name: Name
+    creationInProject: Task creation in project %project%
+    editionInProject: Edit task %task% in project %project%

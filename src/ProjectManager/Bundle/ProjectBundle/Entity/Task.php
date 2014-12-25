@@ -44,6 +44,20 @@ class Task
     protected $startDate;
 
     /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $endDate;
+
+    protected $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ProjectManager\Bundle\UserBundle\Entity\User", inversedBy="assignedTasks")
+     * @ORM\JoinColumn(name="assignedTo", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $assignedTo;
+
+
+    /**
      * @return mixed
      */
     public function getAssignedTo()
@@ -107,18 +121,6 @@ class Task
         $this->status = $status;
     }
 
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     */
-    protected $endDate;
-
-    protected $status;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Worker", inversedBy="assignedTasks")
-     * @ORM\JoinColumn(name="assignedTo", referencedColumnName="id", onDelete="SET NULL")
-     */
-    protected $assignedTo;
 
     /**
      * Constructor

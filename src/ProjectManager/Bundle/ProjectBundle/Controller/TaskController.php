@@ -66,6 +66,40 @@ class TaskController extends AbstractController
     }
 
     /**
+     * @Template
+     */
+    public function editAction(Request $request, $taskId, $projectId = 0)
+    {
+        $taskRepository = $this->getRepository(self::REPOSITORY_NAME);
+        $task = $taskRepository->find($taskId);
+
+        if (0 === $projectId) {
+            $projectId = $task->getProject()->getId();
+        }
+
+        $form = $this->createForm(new TaskType(), $task, array(
+            'action' => $this->generateUrl('pm_project_task_edit', array('projectId' => $projectId, 'taskId' => $taskId)),
+        ))
+            ->add('save', 'submit');
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $task = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($task);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl(ProjectController::BASE_URL.'_edit', array('id' => $projectId)));
+        }
+
+        return array(
+            'form' => $form->createView(),
+            'task' => $task,
+        );
+    }
+
+    /**
      * Deletes a task
      *
      * @param $projectId Id of the concerned project
@@ -73,15 +107,19 @@ class TaskController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($projectId, $id)
+    public function deleteAction(Request $request, $projectId, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $task = $em->getRepository(self::REPOSITORY_NAME)->find($id);
-        if ($task) {
-            $em->remove($task);
-            $em->flush();
-        }
+        $form = $this->createDeleteForm($id, self::BASE_URL, array('projectId' => $projectId));
+        $form->handleRequest($request);
 
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $task = $em->getRepository(self::REPOSITORY_NAME)->find($id);
+            if ($task) {
+                $em->remove($task);
+                $em->flush();
+            }
+        }
         return $this->redirect($this->generateUrl(ProjectController::BASE_URL.'_edit', array('id' => $projectId)));
     }
 }

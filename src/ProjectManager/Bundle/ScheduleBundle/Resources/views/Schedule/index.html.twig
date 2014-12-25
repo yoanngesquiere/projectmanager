@@ -38,7 +38,9 @@ Week : {{ week }}
                 <td>{{ user.firstName }} {{ user.lastName }}
                     <div id="user_{{ user.id }}_tasks" class="user_tasks">
                         {% for task in user.assignedTasks %}
-                             {"id":"{{ task.id }}","name":"{{ task.name }}","start":"{{ task.startDate|date("ymd") }}","end":"{{ task.endDate|date("ymd") }}"}
+                            {"id":"{{ task.id }}","name":"{{ task.name }}",
+                            "start":"{{ task.startDate|date("ymd") }}","end":"{{ task.endDate|date("ymd") }}",
+                            "link":"{{ path('pm_project_task_edit', {'taskId': task.id}) }}"}
                         {% endfor %}
                     </div>
                 </td>
