@@ -16,6 +16,10 @@ Currently, it allows to :
 
 # Project installation
 
+Since it is a Symfony2 app, the requirements are the same as the Symfony's requirements 
+(see [Symony2 requirements] (http://symfony.com/doc/current/reference/requirements.html))
+
+
 In order to install the project manager, you need to clone the project.
 ```sh
 git clone https://github.com/yoanngesquiere/projectmanager.git
