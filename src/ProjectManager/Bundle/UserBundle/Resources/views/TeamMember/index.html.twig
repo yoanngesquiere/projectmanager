@@ -11,7 +11,7 @@
         {% for team_member in team_members %}
 		<tr>
 		    <td>{{ team_member.member.firstName }} {{ team_member.member.lastName }}</td>
-		    <td>TODO</td>
+		    <td>{{ team_member.role.name }}</td>
 		    <td>Update /
             {% form_theme delete_forms[team_member.id] ':Forms:fields.html.twig' %}
             {{ form(delete_forms[team_member.id]) }}

@@ -22,7 +22,14 @@ class TeamMemberType extends AbstractType
                 'query_builder' => function(\ProjectManager\Bundle\UserBundle\Entity\UserRepository $er) use ($options) {
                     return $er->createQueryForMembersNotInTeam($options['team_id']);
                 }
-            ));
+            ))
+            ->add('role', 'entity', array(
+                'class' => 'ProjectManagerUserBundle:Role',
+                'expanded' => true,
+                'multiple' => true,
+                /*'query_builder' => function(\ProjectManager\Bundle\UserBundle\Entity\UserRepository $er) use ($options) {
+                    return $er->createQueryForMembersNotInTeam($options['team_id']);
+                }*/));
         ;
     }
     
