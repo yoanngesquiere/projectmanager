@@ -17,3 +17,13 @@ user:
         firstName: Prénom
         lastName: Nom
         email: eMail
+
+role:
+    form:
+        name: Nom
+    id: Id
+    name: Nom
+    actions: Actions
+    creation: Nouveau role
+    update: Modification du role
+

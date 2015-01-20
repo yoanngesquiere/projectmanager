@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    {% if entity.name != "" %}
+        <h1>{{ 'role.update'|trans }}: {{ entity.name }}</h1>
+    {% else %}
+        <h1>{{ 'role.creation'|trans }}</h1>
+    {% endif %}
+
+    {{ form(form) }}
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('pm_user_role_list') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+{% endblock %}

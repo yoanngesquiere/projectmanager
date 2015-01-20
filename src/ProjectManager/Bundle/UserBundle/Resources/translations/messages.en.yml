@@ -18,4 +18,12 @@ user:
         lastName: Last name
         email: Email
 
+role:
+    form:
+        name: Name
+    id: Id
+    name: Name
+    actions: Actions
+    creation: New role
+    update: Update role
 
