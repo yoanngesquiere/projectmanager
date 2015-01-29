@@ -39,3 +39,5 @@ php app/console doctrine:schema:create
 ```
 
 And that's it.
+
+If you have docker (>= 1.3) and fig, it's even simpler: just launch the startfig.sh and it launch your web brower at the ip address that is shown at the end of the script and you can see the application.
