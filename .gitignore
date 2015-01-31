@@ -7,3 +7,5 @@
 /web/assets/
 /behat.yml
 /bin
+/node_modules/
+/web/app.js

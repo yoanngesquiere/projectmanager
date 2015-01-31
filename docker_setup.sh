@@ -16,6 +16,7 @@ echo "Symfony Installation : End"
 # Install FrontEnd dependencies
 echo "FrontEnd dependencies Installation : Start"
 npm install
+npm install -g gulp
 echo "FrontEnd dependencies Installation : End"
 
 echo "Installation Complete"
