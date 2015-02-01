@@ -1,4 +1,6 @@
-var React = require('react')
+var $ = jQuery =  require("jquery"),
+    React = require('react'),
+    bootstrap = require('bootstrap');
 
 var DeletionConfirmationPopIn = React.createClass({
     render: function() {
@@ -9,7 +11,11 @@ var DeletionConfirmationPopIn = React.createClass({
         );
     }
 });
-/*React.render(
-<DeletionConfirmationPopIn />,
-    document.getElementById('content')
-);*/
+
+var docs = document.getElementsByClassName('DeletionConfirmationPopInDiv');
+for (var i=0, max=docs.length; i < max; i++) {
+    React.render(
+        <DeletionConfirmationPopIn />,
+        docs[i]
+    );
+}

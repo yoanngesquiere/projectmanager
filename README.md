@@ -56,7 +56,7 @@ To generate the front-end assets, run:
 gulp
 ```
 
-And that's it. Project Manager is now installed
+And that's it. Project Manager is now installed.
 
 # Docker project installation
 
