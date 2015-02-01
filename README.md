@@ -14,7 +14,7 @@ Currently, it allows to :
 - Manage projects
 - Manage projects' tasks
 
-# Project installation
+# Classic project installation
 
 Since it is a Symfony2 app, the requirements are the same as the Symfony's requirements 
 (see [Symony2 requirements] (http://symfony.com/doc/current/reference/requirements.html))
@@ -25,7 +25,9 @@ In order to install the project manager, you need to clone the project.
 git clone https://github.com/yoanngesquiere/projectmanager.git
 ```
 
-Then run
+You also need to have [composer] (https://getcomposer.org/download/) installed.
+
+Then run:
 ```sh
 cd projectmanager
 composer install
@@ -38,6 +40,24 @@ php app/console doctrine:database:create
 php app/console doctrine:schema:create
 ```
 
-And that's it.
+# Working on the front-end part
 
-If you have docker (>= 1.3) and fig, it's even simpler: just launch the startfig.sh, wait during the installation, then open your web brower at the ip address that is shown at the end of the script execution so you can see the application.
+In order to install the front-end dependencies, you need to have npm. And to generate the assets for Symfony, you need gulp.
+Make sure you have [NodeJs / NPM] (https://docs.npmjs.com/getting-started/installing-node) installed.
+
+To install gulp and the project dependencies, run:
+```sh
+npm install
+npm install -g gulp
+```
+
+To generate the front-end assets, run:
+```sh
+gulp
+```
+
+And that's it. Project Manager is now installed
+
+# Docker project installation
+
+If you have docker (>= 1.3) and fig, it's even simpler: just launch the ```sh startfig.sh```, wait during the installation, then open your web browser at the ip address that is shown at the end of the script execution so you can see the application.
