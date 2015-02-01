@@ -1,6 +1,7 @@
 var $ = jQuery =  require("jquery"),
     React = require('react'),
     bootstrap = require('bootstrap');
+var test = require('./scripts/calendar/main');
 
 var DeletionConfirmationPopIn = React.createClass({
     render: function() {

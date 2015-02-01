@@ -1,3 +1,5 @@
+var $ = jQuery =  require("jquery");
+
 function addEvent(obj, event, fct) {
     if (obj.attachEvent)
         obj.attachEvent("on" + event, fct);

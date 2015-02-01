@@ -4,12 +4,6 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Project Manager{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
-        {% stylesheets
-            'bundles/projectmanagercore/css/*'
-            output="assets/css/common.css" filter="cssrewrite"
-        %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
