@@ -22,6 +22,7 @@ gulp.task(
                 transform: ['reactify'],
                 extensions: ['.jsx']
             }))
+            .pipe(tasks.if(tasks.util.env.dist, tasks.uglify()))
             .pipe(gulp.dest(dist));
     }
 );
