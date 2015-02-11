@@ -9,7 +9,7 @@ for (var i=0, max=deleteBtns.length; i < max; i++) {
     deleteBtns[i].onclick=function(){
         var deleteModal = document.getElementById('deleteModal');
         if (deleteModal) {
-            React.render(React.createElement(modal, {'name': this.name}), deleteModal);
+            React.render(React.createElement(modal, {'name': this.getAttribute("entity_name"), 'form':this.form}), deleteModal);
         }
     };
 }

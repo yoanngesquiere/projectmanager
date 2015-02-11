@@ -4,8 +4,9 @@
     var React = require('react');
 
     module.exports = React.createClass({
-
-
+        handleClick: function(event) {
+            this.props.form.submit();
+        },
         render: function() {
             return (
                 <div className="modal-dialog">
@@ -19,7 +20,7 @@
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Delete</button>
+                            <button type="button" className="btn btn-primary" onClick={this.handleClick}>Delete</button>
                         </div>
                     </div>
                 </div>

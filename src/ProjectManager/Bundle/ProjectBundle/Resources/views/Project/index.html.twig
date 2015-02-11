@@ -30,6 +30,7 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="modal fade" id="deleteModal"></div>
     {% set path = path('pm_project_project_add') %}
     {{ include('ProjectManagerCoreBundle:Buttons:newButton.html.twig',
     { 'object_url': path, 'object_name': 'project' }) }}

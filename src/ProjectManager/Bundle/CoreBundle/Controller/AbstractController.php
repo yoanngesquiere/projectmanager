@@ -26,7 +26,9 @@ class AbstractController  extends Controller
                 $this->generateUrl(
                     $baseName.'_delete',
                     $options
-                )
+                ),
+                array('entity_id' => $entity->getId(),
+                    'entity_name' => $entity->__toString())
             )->createView();
         }
 

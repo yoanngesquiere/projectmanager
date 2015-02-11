@@ -2,13 +2,15 @@
 
 
 {% block glyphicon_button_widget -%}
-    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}
+            data-toggle="modal" data-target="#deleteModal"
+            id="delete_user_1">
         <span class="glyphicon {{ glyphicon }}" aria-hidden="true"></span>
         {{ label|trans({}, translation_domain) }}</button>
 {%- endblock glyphicon_button_widget %}
 
 {% block _delete_object_submit_widget -%}
-    {% set type = type|default('submit') %}
+    {% set type = type|default('button') %}
     {% set glyphicon = 'glyphicon-remove' %}
     {{- block('glyphicon_button_widget') -}}
 {%- endblock _delete_object_submit_widget %}
@@ -26,3 +28,4 @@
         {% endfor -%}
     </table>
 {% endblock choice_widget_expanded %}
+

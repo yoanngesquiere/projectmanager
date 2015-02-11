@@ -37,16 +37,21 @@ class FormCreator {
      *
      * @return \Symfony\Component\Form\Form
      */
-    public function deleteFormCreator($url)
+    public function deleteFormCreator($url, $customAttributes = array())
     {
         $defaultData = array('message' => 'Assign');
+        $attributes = array('class' => 'btn btn-primary delete-btn');
+        foreach ($customAttributes as $key => $value)
+        {
+            $attributes[$key] = $value;
+        }
         return $this->formFactory->createNamedBuilder('delete_object', 'form', $defaultData, array())
             ->setAction($url)
             ->setMethod('DELETE')
             ->add('submit', 'submit',
                 array(
                     'label' => 'buttons.delete',
-                    'attr' => array('class' => 'btn btn-primary'),
+                    'attr' => $attributes,
                 )
             )
             ->getForm();

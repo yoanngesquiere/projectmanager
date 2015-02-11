@@ -241,4 +241,9 @@ class Task
     {
         return $this->subTasks;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

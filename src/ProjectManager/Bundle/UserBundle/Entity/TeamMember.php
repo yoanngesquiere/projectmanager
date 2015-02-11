@@ -130,4 +130,9 @@ class TeamMember
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->member->__toString();
+    }
 }
