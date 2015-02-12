@@ -1,6 +1,7 @@
 Feature: User Management
 	Scenario: Purge DB
 		Given I remove "User" with "first_name" "Behat First Name"
+	  	Given I remove "User" with "first_name" "Behat First Name Edit"
 
 	Scenario: User HomePage
 		Given I am on "/user"
@@ -41,10 +42,10 @@ Feature: User Management
       And I should see "Behat Last Name Edit"
       And I should see "New user"
 
-  Scenario: User Delete:
-    Given I am on "/user"
-    And I press "Delete" in "tr" with element "td" "Behat First Name Edit"
-    Then I should see "User list"
-    And I should see "New user"
-    And I should not see "Behat First Name Edit"
-    And I should not see "Behat Last Name Edit"
+#  Scenario: User Delete:
+#    Given I am on "/user"
+#    And I press "Delete" in "tr" with element "td" "Behat First Name Edit"
+#    Then I should see "User list"
+#    And I should see "New user"
+#    And I should not see "Behat First Name Edit"
+#    And I should not see "Behat Last Name Edit"

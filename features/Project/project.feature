@@ -2,6 +2,7 @@ Feature: Project Management
 
   Scenario: Purge DB
     Given I remove "Project" with "name" "Behat Project"
+    Given I remove "Project" with "name" "Behat Project Edit"
 
   Scenario: Project HomePage
     Given I am on "/project"
@@ -29,9 +30,9 @@ Feature: Project Management
     And I should see "New project"
     And I should see "Behat Project Edit"
 
-  Scenario: Project Deletion
-    Given I am on "/project"
-    And I press "Delete" in "tr" with element "td" "Behat Project Edit"
-    Then I should see "Team Management"
-    And I should see "New project"
-    And I should not see "Behat Project"
+#  Scenario: Project Deletion
+#    Given I am on "/project"
+#    And I press "Delete" in "tr" with element "td" "Behat Project Edit"
+#    Then I should see "Team Management"
+#    And I should see "New project"
+#    And I should not see "Behat Project"

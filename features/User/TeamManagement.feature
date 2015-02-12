@@ -2,6 +2,7 @@ Feature: Team Management
 
 	Scenario: Purge DB
 		Given I remove "Team" with "name" "Behat Team"
+	  	Given I remove "Team" with "name" "Behat Team Edit"
 
 	Scenario: Team HomePage
 		Given I am on "/team"
@@ -35,9 +36,9 @@ Feature: Team Management
         And I should see "New team"
         And I should see "Behat Team Edit"
 
-    Scenario: Team Deletion
-        Given I am on "/team"
-        And I press "Delete" in "tr" with element "td" "Behat Team Edit"
-        Then I should see "Team Management"
-        And I should see "New team"
-        And I should not see "Behat Team"
+#    Scenario: Team Deletion
+#        Given I am on "/team"
+#        And I press "Delete" in "tr" with element "td" "Behat Team Edit"
+#        Then I should see "Team Management"
+#        And I should see "New team"
+#        And I should not see "Behat Team"
