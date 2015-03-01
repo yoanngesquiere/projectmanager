@@ -72,7 +72,7 @@ class FeatureContext extends MinkContext implements Context, KernelAwareContext
             $session->getSelectorsHandler()->selectorToXpath('xpath', $xpath)
         );
         if (null === $result) {
-            throw new \InvalidArgumentException(sprintf('Could not evaluate XPath %s', $xpath));
+            throw new \InvalidArgumentException(sprintf('Could not evaluate XPath %s', $xpath.$session->getPage().getContent()));
         }
         return $result;
     }
