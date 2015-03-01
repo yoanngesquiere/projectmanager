@@ -12,6 +12,7 @@ before_script:
     - php app/console doctrine:database:create -q
     - echo "- create SQL schema"
     - php app/console doctrine:schema:create -q
+    - cp behat.yml.dist behat.yml
 
     # Firefox
     - sudo apt-get install -y --force-yes firefox
