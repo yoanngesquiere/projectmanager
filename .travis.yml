@@ -13,13 +13,14 @@ before_script:
     - echo "- create SQL schema"
     - php app/console doctrine:schema:create -q
 
+    # Firefox
+    - sudo apt-get install -y --force-yes firefox
+    
     # XVFB
-    - "export DISPLAY=:99.0"
-    - "Xvfb :99.0 -extension RANDR > /dev/null &"
+    - "Xvfb :0 -screen 0 1024x768x24 > /dev/null 2>/dev/null &"
+    - "export DISPLAY=:0"
 
     # Selenium server
     - "wget http://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar"
     - "java -jar selenium-server-standalone-2.45.0.jar > /dev/null 2>/dev/null &"
 
-    # Firefox
-    - sudo apt-get install -y --force-yes firefox
