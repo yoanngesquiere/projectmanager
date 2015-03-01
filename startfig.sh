@@ -5,6 +5,7 @@
 # All actions that must be run in the container can be added in the docker_setup script
 # Requires docker >= 1.3
 
+fig build
 fig up -d
 docker exec projectmanager_web_1 /var/www/docker_setup.sh
 

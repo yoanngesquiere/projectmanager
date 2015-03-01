@@ -4,6 +4,8 @@ script: bin/behat
 
 before_script:
     - sudo apt-get update -qq
+    - curl -sL https://deb.nodesource.com/setup | bash -
+    - sudo apt-get install -y nodejs nodejs-legacy
     - composer self-update
     - composer install
     - echo "- drop database"
@@ -12,3 +14,15 @@ before_script:
     - php app/console doctrine:database:create -q
     - echo "- create SQL schema"
     - php app/console doctrine:schema:create -q
+    - npm install
+
+    # XVFB
+    - "export DISPLAY=:99.0"
+    - "Xvfb :99.0 -extension RANDR > /dev/null &"
+
+    # Selenium server
+    - "wget http://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar"
+    - "java -jar selenium-server-standalone-2.45.0.jar > /dev/null 2>/dev/null &"
+
+    # Firefox
+    - sudo apt-get install -y --force-yes firefox

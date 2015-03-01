@@ -30,9 +30,12 @@ Feature: Project Management
     And I should see "New project"
     And I should see "Behat Project Edit"
 
-#  Scenario: Project Deletion
-#    Given I am on "/project"
-#    And I press "Delete" in "tr" with element "td" "Behat Project Edit"
-#    Then I should see "Team Management"
-#    And I should see "New project"
-#    And I should not see "Behat Project"
+  @javascript
+  Scenario: Project Deletion
+    Given I am on "/project"
+    And I press "Delete" in "tr" with element "td" "Behat Project Edit"
+    And I wait for the modal
+    And I press "Delete" in the modal
+    Then I should see "Team Management"
+    And I should see "New project"
+    And I should not see "Behat Project"

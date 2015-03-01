@@ -94,4 +94,37 @@ class FeatureContext extends MinkContext implements Context, KernelAwareContext
         $result = $this->iFollowSomethingAfter($link, $element, $subelement, $value, 'button');
         $result->press();
     }
+
+
+    /**
+     * @Then /^I should see the modal "([^"]*)"$/
+     */
+    public function iShouldSeeTheModal($title)
+    {
+        $this->getSession()->wait(20000, "(0 === jQuery.active && 0 === jQuery(':animated').length)");
+        $this->assertElementContainsText('.modal-title', $title);
+        PHPUnit_Framework_TestCase::assertTrue($this->getSession()->getPage()->find('css', '.modal')->isVisible());
+    }
+
+    /**
+     * @When /^I wait for the modal$/
+     */
+    public function iWaitForTheModal()
+    {
+        $this->getSession()->wait(20000, "(0 === jQuery.active && 0 === jQuery(':animated').length)");
+    }
+
+    /**
+     * @When /^I press "(?P<link>(?:[^"]|\\")*)" in the modal$/
+     */
+    public function iPressLinkInTheModal($link)
+    {
+        $session = $this->getSession();
+        $xpath = '//div[contains(@class,"modal")]//button[contains(text(), "'.$link.'")]';
+        $result = $session->getPage()->find(
+            'xpath',
+            $session->getSelectorsHandler()->selectorToXpath('xpath', $xpath)
+        );
+        $result->press();
+    }
 }

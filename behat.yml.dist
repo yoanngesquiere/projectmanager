@@ -6,7 +6,7 @@ default:
             contexts:
                 - ProjectContext:
                     session: '@session'
-        user:
+        default:
             paths:
                  - %paths.base%/features/User
             contexts: 
@@ -15,6 +15,10 @@ default:
     extensions:
         Behat\Symfony2Extension: ~
         Behat\MinkExtension:
+            base_url: 'http://localhost/web/app_dev.php/'
             sessions:
                 default:
                     symfony2: ~
+                selenium2:
+                    selenium2:
+                        wd_host: "http://localhost:4444/wd/hub"
