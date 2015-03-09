@@ -4,6 +4,7 @@ script: bin/behat
 
 before_script:
     - sudo apt-get update -qq
+    - sudo apt-get install apache2
     - composer self-update
     - composer install
     - echo "- drop database"
