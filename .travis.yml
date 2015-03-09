@@ -20,10 +20,6 @@ before_script:
     # XVFB
     - "Xvfb :0 -screen 0 1024x768x24 > /dev/null 2>/dev/null &"
     - "export DISPLAY=:0"
-    
-    # Window manager
-    - "sudo apt-get install fluxbox -y --force-yes"
-    - "fluxbox &"
 
     # Selenium server
     - "wget http://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar"
