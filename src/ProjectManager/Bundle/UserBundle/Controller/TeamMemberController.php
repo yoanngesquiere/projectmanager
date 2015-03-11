@@ -21,18 +21,22 @@ class TeamMemberController extends AbstractController
 	/**
      * List members for a team
      *
+     * @param int $teamId Id of the team
+     * @return array
      * @Template("ProjectManagerUserBundle:TeamMember:index.html.twig")
      */
     public function listAction($teamId) {
-        $em = $this->getDoctrine()->getManager();
-
-        $results = $em->getRepository('ProjectManagerUserBundle:TeamMember')->findBy(array('team'=> $teamId));
-
-        $forms = $this->createDeleteFormsForList($results, self::BASE_URL, array('teamId' => $teamId));
-
+        $results = $this->getRepository(self::REPOSITORY_NAME)->getAllInfoForTeam($teamId);
+        $teamMembers = array();
+        foreach ($results as $user) {
+            foreach ($user->getTeam() as $teamMember) {
+                $teamMembers[] = $teamMember;
+            }
+        }
+        $forms = $this->createDeleteFormsForList($teamMembers, self::BASE_URL, array('teamId' => $teamId));
 
         return array(
-            'team_members' => $results,
+            'users' => $results,
             'delete_forms' => $forms['delete_forms'],
         );
     }
@@ -65,8 +69,8 @@ class TeamMemberController extends AbstractController
         $teamMembers = $em->getRepository(self::REPOSITORY_NAME)->findAll();
         foreach($teamMembers as $teamMember) {
             $em->remove($teamMember);
-            $em->flush();
         }
+        $em->flush();
     }
 
     /**
@@ -120,13 +124,13 @@ class TeamMemberController extends AbstractController
 
         foreach($rolesList as $key => $role) {
             $role = $em->getRepository('ProjectManagerUserBundle:Role')->find($role->getId());
-            $teammember = new TeamMember();
-            $teammember->setTeam($team);
-            $teammember->setMember($member);
-            $teammember->setRole($role);
+            $teamMember = new TeamMember();
+            $teamMember->setTeam($team);
+            $teamMember->setMember($member);
+            $teamMember->setRole($role);
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($teammember);
+            $em->persist($teamMember);
             $em->flush();
         }
     }

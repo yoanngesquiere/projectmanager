@@ -8,16 +8,19 @@
 		</tr>
 	</thead>
 	<tbody>
-        {% for team_member in team_members %}
-		<tr>
-		    <td>{{ team_member.member.firstName }} {{ team_member.member.lastName }}</td>
-		    <td>{{ team_member.role.name }}</td>
-		    <td>Update /
-            {% form_theme delete_forms[team_member.id] ':Forms:fields.html.twig' %}
-            {{ form(delete_forms[team_member.id]) }}
-            </td>
-		{% endfor %}
-		</tr>
+        {% for user in users %}
+        <tr>
+            <td rowspan="{{ user.team|length }}">{{ user.firstName }} {{ user.lastName }}</td>
+            {% for teammember in user.team %}
+                {# This beautiful if is here to manage the rowspan #}
+                {% if loop.index > 1 %}
+                </tr><tr>
+                {% endif %}
+            <td>{{ teammember.role.name }}</td>
+            <td>{{ form(delete_forms[teammember.id]) }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
 	</tbody>
 </table>
 <div class="modal fade" id="deleteModal"></div>
