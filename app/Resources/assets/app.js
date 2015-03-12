@@ -1,7 +1,7 @@
 var $ = jQuery =  require("jquery"),
     React = require('react'),
     bootstrap = require('bootstrap');
-var calendarScript = require('./scripts/calendar/main');
+require('./scripts/calendar/main');
 var modal = require('./scripts/components/modal')
 
 deleteBtns = document.getElementsByClassName('delete-btn');
