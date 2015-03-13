@@ -10,7 +10,8 @@ use ProjectManager\Bundle\UserBundle\Entity\TeamMember;
 use ProjectManager\Bundle\UserBundle\Form\Type\TeamMemberType;
 
 /**
- * Team Member controller.
+ * Class TeamMemberController
+ * @package ProjectManager\Bundle\UserBundle\Controller
  */
 class TeamMemberController extends AbstractController
 {
@@ -26,7 +27,7 @@ class TeamMemberController extends AbstractController
      * @Template("ProjectManagerUserBundle:TeamMember:index.html.twig")
      */
     public function listAction($teamId) {
-        $results = $this->getRepository(self::REPOSITORY_NAME)->getAllInfoForTeam($teamId);
+        $results = $this->getRepository(self::REPOSITORY_NAME)->getAllLinkedInfoForTeam($teamId);
         $teamMembers = array();
         foreach ($results as $user) {
             foreach ($user->getTeam() as $teamMember) {
@@ -35,9 +36,12 @@ class TeamMemberController extends AbstractController
         }
         $forms = $this->createDeleteFormsForList($teamMembers, self::BASE_URL, array('teamId' => $teamId));
 
+        $roles = $this->getRepository(RoleController::REPOSITORY_NAME)->findAll();
+
         return array(
             'users' => $results,
             'delete_forms' => $forms['delete_forms'],
+            'roles' => $roles,
         );
     }
 

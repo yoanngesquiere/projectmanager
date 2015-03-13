@@ -23,4 +23,10 @@
         {% endfor %}
 	</tbody>
 </table>
+
+<div id="roles" hidden>
+{% for role in roles %}
+    {{ role.id }} {{ role.name }}
+{% endfor %}
+</div>
 <div class="modal fade" id="deleteModal"></div>
