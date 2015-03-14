@@ -1,10 +1,12 @@
 var gulp = require('gulp'),
+    source = require('vinyl-source-stream'),
     tasks = require('gulp-load-plugins')(),
     rimraf = require('rimraf'),
-    src = 'app/Resources/assets/',
+    browserify = require('browserify'),
+    src = './app/Resources/assets/',
     dist = 'web/',
-    nodeFolder = 'node_modules/';
-
+    nodeFolder = 'node_modules/',
+    reactify = require('reactify');
 
 gulp.task(
     'clean',
@@ -18,12 +20,15 @@ gulp.task(
 gulp.task(
     'scripts',
     function () {
-        gulp.src(src + 'app.js')
-            .pipe(tasks.browserify({
-                insertGlobals : false,
-                transform: ['reactify'],
-                extensions: ['.jsx']
-            }))
+        return browserify(
+                {
+                    entries: [src + 'app.js'],
+                    transform: [reactify],
+                    debug: true,
+                    cache: {}, packageCache: {}, fullPaths: true
+                }
+            ).bundle()
+            .pipe(source('app.js'))
             .pipe(tasks.if(tasks.util.env.dist, tasks.uglify()))
             .pipe(gulp.dest(dist));
     }
