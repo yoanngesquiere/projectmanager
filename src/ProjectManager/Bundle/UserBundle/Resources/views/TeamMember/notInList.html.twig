@@ -1,5 +1,12 @@
+<h2>{{ 'team.member.add'|trans }}</h2>
 {% form_theme form ':Forms:fields.html.twig' %}
 {{ form_start(form) }}
-{{ form_label(form.member) }}
-{{ form_widget(form.member) }}
+<div class="col-md-6">
+    {{ form_label(form.member) }}
+    {{ form_widget(form.member) }}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.role) }}
+    {{ form_widget(form.role) }}
+</div>
 {{ form_rest(form) }}

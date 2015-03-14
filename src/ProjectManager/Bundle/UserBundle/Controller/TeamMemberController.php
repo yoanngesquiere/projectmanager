@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ProjectManager\Bundle\UserBundle\Entity\Team;
 use ProjectManager\Bundle\UserBundle\Entity\TeamMember;
 use ProjectManager\Bundle\UserBundle\Form\Type\TeamMemberType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class TeamMemberController
@@ -110,6 +111,59 @@ class TeamMemberController extends AbstractController
 			return $this->redirect($this->generateUrl('pm_user_team_list'));
 		}
 		return $this->redirect($this->generateUrl('pm_user_team_edit', array('id' => $teamId)));
+    }
+
+    /**
+     * Updates roles for a given user and a given team
+     *
+     * @param Request $request Request
+     * @param int     $teamId  Team id
+     * @param int     $userId  User Id
+     *
+     * @return Response
+     */
+    public function updateRolesForUserInTeamAction(Request $request, $teamId, $userId)
+    {
+        $data = $request->request->get('roles');
+        $return = array();
+
+        $em = $this->getDoctrine()->getManager();
+        $teamMembers = $em->getRepository(self::REPOSITORY_NAME)->getLinesForUserAndTeam($teamId, $userId);
+
+        $team = $em->getRepository('ProjectManagerUserBundle:Team')->find($teamId);
+        $member = $em->getRepository('ProjectManagerUserBundle:User')->find($userId);
+
+        //Deletes all lines that are no longer right
+        foreach($teamMembers as $teamMember) {
+            $roleId = $teamMember->getRole()->getId();
+            //If the line already exists, we do nothing
+            if(($key = array_search($roleId, (array)$data)) !== false) {
+                unset($data[$key]);
+                $return[$roleId] = 0;
+            } else { //Or we delete it if it is not selected
+                $return[$roleId] = -1;
+                $em->remove($teamMember);
+            }
+        }
+        $em->flush();
+
+        //Add new lines
+        foreach ((array)$data as $newLine) {
+            $role = $em->getRepository('ProjectManagerUserBundle:Role')->find($newLine);
+            $teamMember = new TeamMember();
+            $teamMember->setTeam($team);
+            $teamMember->setMember($member);
+            $teamMember->setRole($role);
+            $em->persist($teamMember);
+            $return[$newLine] = $role->getName();
+        }
+        $em->flush();
+
+        $response = new Response();
+        $response->setContent(json_encode($return));
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setStatusCode(200);
+        return $response;
     }
 
     /**

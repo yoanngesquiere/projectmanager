@@ -1,5 +1,6 @@
 <h2>Team members</h2>
-<table class="records_list table table-striped">
+
+<table class="records_list table table-striped members_team" name="members_team_{{ users|first.team|first.team.id }}">
 	<thead>
 		<tr>
 			<th>User</th>
@@ -9,16 +10,21 @@
 	</thead>
 	<tbody>
         {% for user in users %}
-        <tr>
-            <td rowspan="{{ user.team|length }}">{{ user.firstName }} {{ user.lastName }}</td>
-            {% for teammember in user.team %}
-                {# This beautiful if is here to manage the rowspan #}
-                {% if loop.index > 1 %}
-                </tr><tr>
-                {% endif %}
-            <td>{{ teammember.role.name }}</td>
-            <td>{{ form(delete_forms[teammember.id]) }}</td>
-            {% endfor %}
+        <tr id="team_member_user_{{ user.id }}">
+            <td class="users_column user{{ user.id }}">
+                {{ user.firstName }} {{ user.lastName }}
+            </td>
+            <td class="roles_column user{{ user.id }}" id ="roles_column_user_{{ user.id }}">
+                <div id="roles_selector_{{ user.id }}"></div>
+                {% for teammember in user.team %}
+                <span  id="roles_column_{{ user.id }}_{{ teammember.role.id }}">{{ teammember.role.name }}</span>
+                {% endfor %}
+            </td>
+            <td>
+                Delete User from team //TODO
+                <input type="button" class="update_members" id="update_member{{ user.id }}" value="Edit" />
+
+            </td>
         </tr>
         {% endfor %}
 	</tbody>
@@ -26,7 +32,7 @@
 
 <div id="roles" hidden>
 {% for role in roles %}
-    {{ role.id }} {{ role.name }}
+    <role id="{{ role.id }}">{{ role.name }}</role>
 {% endfor %}
 </div>
 <div class="modal fade" id="deleteModal"></div>

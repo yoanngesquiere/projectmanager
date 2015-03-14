@@ -57,3 +57,9 @@ pm_user_teammember_delete:
     defaults: { _controller: ProjectManagerUserBundle:TeamMember:delete }
     requirements:
         _method:  DELETE
+
+pm_user_teammember_update_roles:
+    path:     /teammember/{teamId}/{userId}/update_roles/
+    defaults: { _controller: ProjectManagerUserBundle:TeamMember:updateRolesForUserInTeam }
+    requirements:
+        _method:  PUT

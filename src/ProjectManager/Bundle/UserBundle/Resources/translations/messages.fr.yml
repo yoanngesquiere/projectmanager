@@ -27,3 +27,8 @@ role:
     creation: Nouveau role
     update: Modification du role
 
+team:
+    member:
+        add: Ajouter un membre à l'équipe
+
+

@@ -13,6 +13,7 @@
         {% endblock %}
         {% block body %}{% endblock %}
 
+        <div id="homepage" hidden>{{ url('pm_schedule_homepage') }}</div>
         {% block javascripts %}
             <script src="{{ asset('app.js') }}"></script>
         {% endblock %}

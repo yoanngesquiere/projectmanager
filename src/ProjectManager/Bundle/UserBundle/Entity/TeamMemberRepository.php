@@ -47,4 +47,23 @@ class TeamMemberRepository extends EntityRepository
         return $qb->getQuery()
             ->getResult();
     }
+
+    /**
+     * Returns all the team member lines for a given team and a given user
+     *
+     * @param int $teamId team id
+     * @param int $userId user id
+     * @return array
+     */
+    public function getLinesForUserAndTeam($teamId, $userId) {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('tm')
+            ->from('ProjectManagerUserBundle:TeamMember', 'tm')
+            ->where('tm.team = :teamId')
+            ->andWhere('tm.member = :userId')
+            ->setParameter('teamId',  $teamId)
+            ->setParameter('userId',  $userId);
+        return $qb->getQuery()
+            ->getResult();
+    }
 }

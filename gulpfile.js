@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     tasks = require('gulp-load-plugins')(),
     rimraf = require('rimraf'),
     browserify = require('browserify'),
+    streamify = require('gulp-streamify'),
     src = './app/Resources/assets/',
     dist = 'web/',
     nodeFolder = 'node_modules/',
@@ -29,7 +30,7 @@ gulp.task(
                 }
             ).bundle()
             .pipe(source('app.js'))
-            .pipe(tasks.if(tasks.util.env.dist, tasks.uglify()))
+            .pipe(tasks.if(tasks.util.env.dist, streamify(tasks.uglify())))
             .pipe(gulp.dest(dist));
     }
 );
