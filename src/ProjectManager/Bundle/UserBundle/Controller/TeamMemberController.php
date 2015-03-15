@@ -43,6 +43,7 @@ class TeamMemberController extends AbstractController
             'users' => $results,
             'delete_forms' => $forms['delete_forms'],
             'roles' => $roles,
+            'team_id' => $teamId,
         );
     }
 
