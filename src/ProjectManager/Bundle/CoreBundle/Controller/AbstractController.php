@@ -15,8 +15,16 @@ class AbstractController  extends Controller
 
     protected function createDeleteFormsForList($entities, $baseName, $options = array())
     {
-
         $deleteForms = array();
+
+        $urlPostfix = "";
+        if (array_key_exists('postfix', $options)) {
+            $urlPostfix = $options['postfix'];
+            unset($options['postfix']);
+        }
+        if ($urlPostfix != "") {
+            $urlPostfix = '_'.$urlPostfix;
+        }
 
         $formCreator = new FormCreator($this->container->get('form.factory'));
 
@@ -24,7 +32,7 @@ class AbstractController  extends Controller
             $options['id'] = $entity->getId();
             $deleteForms[$entity->getId()] = $formCreator->deleteFormCreator(
                 $this->generateUrl(
-                    $baseName.'_delete',
+                    $baseName.'_delete'.$urlPostfix,
                     $options
                 ),
                 array('entity_id' => $entity->getId(),

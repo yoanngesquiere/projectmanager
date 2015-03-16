@@ -52,9 +52,9 @@ pm_user_teammember_team_member_add_members:
     requirements:
         _method:  GET|POST
 
-pm_user_teammember_delete:
+pm_user_teammember_delete_member:
     path:     /teammember/{teamId}/{id}/
-    defaults: { _controller: ProjectManagerUserBundle:TeamMember:delete }
+    defaults: { _controller: ProjectManagerUserBundle:TeamMember:deleteMember }
     requirements:
         _method:  DELETE
 

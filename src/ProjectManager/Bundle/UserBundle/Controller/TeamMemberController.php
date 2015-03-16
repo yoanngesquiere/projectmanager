@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class TeamMemberController extends AbstractController
 {
-
     const REPOSITORY_NAME = 'ProjectManagerUserBundle:TeamMember';
     const BASE_URL = 'pm_user_teammember';
 
@@ -27,15 +26,12 @@ class TeamMemberController extends AbstractController
      * @return array
      * @Template("ProjectManagerUserBundle:TeamMember:index.html.twig")
      */
-    public function listAction($teamId) {
+    public function listAction($teamId)
+    {
         $results = $this->getRepository(self::REPOSITORY_NAME)->getAllLinkedInfoForTeam($teamId);
-        $teamMembers = array();
-        foreach ($results as $user) {
-            foreach ($user->getTeam() as $teamMember) {
-                $teamMembers[] = $teamMember;
-            }
-        }
-        $forms = $this->createDeleteFormsForList($teamMembers, self::BASE_URL, array('teamId' => $teamId));
+        $forms = $this->createDeleteFormsForList(
+            $results, self::BASE_URL, array('teamId' => $teamId, 'postfix' => 'member')
+        );
 
         $roles = $this->getRepository(RoleController::REPOSITORY_NAME)->findAll();
 
@@ -54,35 +50,24 @@ class TeamMemberController extends AbstractController
      * @param int $id     Id of the line
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($teamId, $id) {
+    public function deleteMemberAction($teamId, $id)
+    {
         $em = $this->getDoctrine()->getManager();
-        $teamMember = $em->getRepository(self::REPOSITORY_NAME)->find($id);
-        $em->remove($teamMember);
+        $teamMembers = $em->getRepository(self::REPOSITORY_NAME)->getLinesForUserAndTeam($teamId, $id);
+
+        foreach($teamMembers as $teamMember) {
+            $em->remove($teamMember);
+        }
         $em->flush();
         return $this->redirect($this->generateUrl(TeamController::BASE_URL.'_edit', array('id' => $teamId)));
     }
 
     /**
-     * Deletes all the team member lines for a team/member couple
-     *
-     * Will replace deleteAction when the UI is changed
-     *
-     * @param int $teamId
-     * @param int $userId
-     */
-    private function removeUserFromTeam($teamId, $userId) {
-        $em = $this->getDoctrine()->getManager();
-        $teamMembers = $em->getRepository(self::REPOSITORY_NAME)->findAll();
-        foreach($teamMembers as $teamMember) {
-            $em->remove($teamMember);
-        }
-        $em->flush();
-    }
-
-    /**
      * List members that are not in a team
-     * 
+     *
+     * @param int $teamId Id of the current team
      * @Template("ProjectManagerUserBundle:TeamMember:notInList.html.twig")
+     * @return array
      */
     public function listNotInTeamAction($teamId)
     {
@@ -93,8 +78,13 @@ class TeamMemberController extends AbstractController
         );
     }
 
-	/**
-     * Submit the form
+    /**
+     * Function to add members to the current team.
+     * Displays the form and manages the validations
+     *
+     * @param Request $request http request
+     * @param int     $teamId  Current team id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function addMembersToTeamAction(Request $request, $teamId)
     {
@@ -140,7 +130,7 @@ class TeamMemberController extends AbstractController
             //If the line already exists, we do nothing
             if(($key = array_search($roleId, (array)$data)) !== false) {
                 unset($data[$key]);
-                $return[$roleId] = 0;
+                $return[$roleId] = $teamMember->getRole()->getName();
             } else { //Or we delete it if it is not selected
                 $return[$roleId] = -1;
                 $em->remove($teamMember);
@@ -190,8 +180,8 @@ class TeamMemberController extends AbstractController
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($teamMember);
-            $em->flush();
         }
+        $em->flush();
     }
 
     /**

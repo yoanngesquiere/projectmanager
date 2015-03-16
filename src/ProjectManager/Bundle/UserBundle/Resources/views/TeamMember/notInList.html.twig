@@ -1,6 +1,6 @@
 <h2>{{ 'team.member.add'|trans }}</h2>
 {% form_theme form ':Forms:fields.html.twig' %}
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'class': 'pm_full_width'}} ) }}
 <div class="col-md-6">
     {{ form_label(form.member) }}
     {{ form_widget(form.member) }}

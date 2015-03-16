@@ -34,19 +34,35 @@ for (var i=0, max=deleteBtns.length; i < max; i++) {
  * @return void
  */
 var saveTeamMemberRoles = function(userId, roles) {
+    /**
+     * Updates the team member page with the changes when roles are saved
+     *
+     * @param array data 'role id' => -1 (delete), 0 (no change), other (name of the new role)
+     */
     var updateGUI = function(data) {
         _.forEach(data, function(n, key) {
-            if (n === -1) {
-                var span = document.getElementById('roles_column_' + userId + '_' + key);
-                span.parentNode.removeChild(span);
-            } else if (n !== 0) {
-                var parentElement = document.getElementById('roles_column_user_' + userId);
-                var line = '<span  id="roles_column_' + userId + '_' + key + '">' + n + '</span> ';
-                parentElement.innerHTML = parentElement.innerHTML + line;
+            var parentElement = document.getElementById('roles_column_user_' + userId);
+            var line = '<span  id="roles_column_' + userId + '_' + key + '">' + n + '</span> ';
+            var span = document.getElementById('roles_column_' + userId + '_' + key);
+
+            if (n === -1) { // The role is no longer assigned to the user
+                // When the nodes are removed before saving, the span is null
+                // Otherwise, we have to delete it
+                if (span !== null) {
+                    span.parentNode.removeChild(span);
+                }
+            } else {
+                //If the node isn't present, we have to add it
+                if (span === null) {
+                    parentElement.innerHTML = parentElement.innerHTML + line;
+                }
             }
         });
     }
 
+    /**
+     * Saves all the changes made in the GUI calling the BO
+     */
     var saveRoles = function() {
         //Serialize the data
         var queryString = "";
@@ -80,6 +96,18 @@ var saveTeamMemberRoles = function(userId, roles) {
 
     saveRoles();
 }
+/**
+ * Restore the GUI when the user cancels the roles update on the team member page
+ *
+ * @param array data Array of roles {id, name}
+ */
+var restoreTeamMemberRoles = function(userId, data) {
+    _.forEach(data, function(role, key) {
+        var parentElement = document.getElementById('roles_column_user_' + userId);
+        var line = '<span  id="roles_column_' + userId + '_' + role.id + '">' + role.name + '</span> ';
+        parentElement.innerHTML = parentElement.innerHTML + line;
+    });
+};
 
 /**
  * allRoles is used on the team member page (route pm_user_team_edit)
@@ -104,11 +132,13 @@ $('.update_members').each(function() {
     $(this).click(function() {
         // Gets all the current roles for the user
         var currentUserId = $(this).attr('id').substring('update_member'.length);
-        var userRoles = $('.roles_column.user'+currentUserId+' span');
+        var userRoles = $('.roles_column.user'+currentUserId+' span[id^=\'roles_column_\']');
         var currentsRoles = new Array();
         userRoles.each(function() {
-            var id = $(this).attr('id').substring('roles_column_'.length + currentUserId.length + 1)
-            currentsRoles.push(id);
+            var id = $(this).attr('id').substring('roles_column_'.length + currentUserId.length + 1);
+            var name = $(this).text();
+            currentsRoles.push({id: id,name: name});
+            $(this)[0].parentNode.removeChild($(this)[0]);
         });
 
         // Displays the update form
@@ -117,7 +147,8 @@ $('.update_members').each(function() {
                 choice,
                 {
                     'availableValues': allRoles, 'originalSelection': currentsRoles,
-                    'objectId': currentUserId, 'saveMethod': saveTeamMemberRoles
+                    'objectId': currentUserId, 'saveMethod': saveTeamMemberRoles,
+                    'cancelMethod': restoreTeamMemberRoles
                 }
             ),
             $('#roles_selector_'+currentUserId)[ 0 ]);

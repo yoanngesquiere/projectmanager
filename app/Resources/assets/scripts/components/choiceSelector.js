@@ -10,14 +10,15 @@
                 originalSelection: new Array(),
                 availableValues: new Array(),
                 objectId: 0,
-                saveMethod: function(){}
+                saveMethod: function(){},
+                cancelMethod: function(){}
             };
          },
 
         getInitialState: function() {
             var selection = new Array();
             for (var i=0, max=this.props.originalSelection.length; i < max; i++) {
-                selection.push(this.props.originalSelection[i]);
+                selection.push(this.props.originalSelection[i].id);
             }
 
             return {
@@ -40,11 +41,15 @@
                 this.props.objectId,
                 this.state.currentSelection
             );
-            this.handleCancelClick(event);
+            React.unmountComponentAtNode(this.getDOMNode().parentNode);
         },
 
         handleCancelClick: function(event) {
             React.unmountComponentAtNode(this.getDOMNode().parentNode);
+            this.props.cancelMethod(
+                this.props.objectId,
+                this.props.originalSelection
+            );
         },
 
         render: function() {

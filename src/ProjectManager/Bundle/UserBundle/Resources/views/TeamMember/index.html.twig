@@ -21,9 +21,11 @@
                 {% endfor %}
             </td>
             <td>
-                Delete User from team //TODO
-                <input type="button" class="update_members" id="update_member{{ user.id }}" value="Edit" />
-
+                {{ include('ProjectManagerCoreBundle:Buttons:editButton.html.twig',
+                    { 'btn_id': "update_member"~ user.id, 'btn_classes' : "update_members" })
+                }}
+                {% form_theme delete_forms[user.id] ':Forms:fields.html.twig' %}
+                {{ form(delete_forms[user.id]) }}
             </td>
         </tr>
         {% endfor %}
