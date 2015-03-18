@@ -60,4 +60,4 @@ And that's it. Project Manager is now installed.
 
 # Docker project installation
 
-If you have docker (>= 1.3) and fig, it's even simpler: just launch ``` ./startfig.sh```, wait during the installation, then open your web browser at the ip address that is shown at the end of the script execution so you can see the application.
+If you have docker (>= 1.3) and fig, it's even simpler: just launch ``` ./start-in-docker.sh```, wait during the installation, then open your web browser at the ip address that is shown at the end of the script execution so you can see the application.
