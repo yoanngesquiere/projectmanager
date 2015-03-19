@@ -9,13 +9,11 @@ Week : {{ week }}
                 <td class="week_calendar_header calendar_users">
                     Users
                 </td>
-                {% for i in first_day..6 %}
-                    {{include("ProjectManagerScheduleBundle:Schedule:_calendar_column_header.html.twig",
-                        {'first_day': first_day_on_calendar, 'day': i, 'first_weekday': first_day, 'diff': 0})}}
-                {% endfor %}
-                {% for i in 0..(first_day-1) %}
-                    {{include("ProjectManagerScheduleBundle:Schedule:_calendar_column_header.html.twig",
-                        {'first_day': first_day_on_calendar, 'day': i, 'first_weekday': first_day, 'diff': 7})}}
+                {% for day in week_info.week_days %}
+                    <td class="week_calendar_header day_{{ day['day_number'] }}" id="column{{ day['date']|date("ymd") }}">
+                        {{ ('days.'~day['date'])|trans }}
+                        {{ day['date']|date("d/m/y") }}
+                    </td>
                 {% endfor %}
             </tr>
         </thead>
@@ -31,13 +29,9 @@ Week : {{ week }}
                         {% endfor %}
                     </div>
                 </td>
-                {% for i in first_day..6 %}
-                    <td class="day_{{ i }}">
-                    </td>
-                {% endfor %}
-                {% for i in 0..(first_day-1) %}
-                    <td class="day_{{ i }}">
-                    </td>
+                {% for day in week_info.week_days %}
+                <td class="day_{{ day['day_number'] }}">
+                </td>
                 {% endfor %}
             </tr>
         {% endfor %}
@@ -45,4 +39,3 @@ Week : {{ week }}
     </table>
 </div>
 {% endblock %}
-
