@@ -8,7 +8,7 @@ RUN apt-get install -y php5-curl wget xvfb
 # Install firefox on debian...
 RUN apt-get remove iceweasel
 RUN echo "\ndeb http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main" | tee -a /etc/apt/sources.list > /dev/null
-RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C1289A29
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C1289A29
 RUN apt-get update
 RUN apt-get install -y firefox-mozilla-build
 
