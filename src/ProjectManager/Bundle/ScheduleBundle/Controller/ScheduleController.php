@@ -35,7 +35,7 @@ class ScheduleController extends AbstractController
             'ProjectManagerScheduleBundle:Schedule:index.html.twig',
             array(
                 'week' => $weekNumber,
-                'day' => $firstDayOnCalendar,
+                'first_day_on_calendar' => $firstDayOnCalendar,
                 'first_day' => $firstDayOfWeek,
                 'users' => $usersUpdated,
             )

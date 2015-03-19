@@ -1,0 +1,6 @@
+{% set columnDate = first_day_on_calendar|date_modify("+ " ~ (day - first_weekday + diff) ~  " day") %}
+
+<td class="week_calendar_header day_{{ day }}" id="column{{ columnDate|date("ymd") }}">
+    {{ ('days.'~day)|trans }}
+    {{ columnDate|date("d/m/y") }}
+</td>

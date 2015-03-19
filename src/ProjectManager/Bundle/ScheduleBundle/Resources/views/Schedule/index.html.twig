@@ -10,18 +10,12 @@ Week : {{ week }}
                     Users
                 </td>
                 {% for i in first_day..6 %}
-                    {% set columnDate=day|date_modify("+ " ~ (i-first_day) ~  " day") %}
-                    <td class="week_calendar_header day_{{ i }}" id="column{{ columnDate|date("ymd") }}">
-                        {{ ('days.'~i)|trans }}
-                        {{ columnDate|date("d/m/y") }}
-                    </td>
+                    {{include("ProjectManagerScheduleBundle:Schedule:_calendar_column_header.html.twig",
+                        {'first_day': first_day_on_calendar, 'day': i, 'first_weekday': first_day, 'diff': 0})}}
                 {% endfor %}
                 {% for i in 0..(first_day-1) %}
-                {% set columnDate=day|date_modify("+ " ~ (i-first_day+7) ~  " day") %}
-                    <td class="week_calendar_header day_{{ i }}" id="column{{ columnDate|date("ymd") }}">
-                        {{ ('days.'~i)|trans }}
-                        {{ columnDate|date("d/m/y") }}
-                    </td>
+                    {{include("ProjectManagerScheduleBundle:Schedule:_calendar_column_header.html.twig",
+                        {'first_day': first_day_on_calendar, 'day': i, 'first_weekday': first_day, 'diff': 7})}}
                 {% endfor %}
             </tr>
         </thead>
