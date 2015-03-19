@@ -11,7 +11,7 @@ Week : {{ week }}
                 </td>
                 {% for day in week_info.week_days %}
                     <td class="week_calendar_header day_{{ day['day_number'] }}" id="column{{ day['date']|date("ymd") }}">
-                        {{ ('days.'~day['date'])|trans }}
+                        {{ ('days.'~day['day_number'])|trans }}
                         {{ day['date']|date("d/m/y") }}
                     </td>
                 {% endfor %}

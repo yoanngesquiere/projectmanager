@@ -22,10 +22,13 @@ class ScheduleController extends AbstractController
         {
             $user = new Worker($user);
             $user->setAssignedTasks($this->getRepository('ProjectManagerProjectBundle:Task')
-                ->getTasksForPeriod(array_values($weekInfo['week_days'])[0]['date'], end($weekInfo['week_days'])['date'], $user));
+                ->getTasksForPeriod(
+                    array_values($weekInfo['week_days'])[0]['date'],
+                    end($weekInfo['week_days'])['date'], $user
+                )
+            );
             $usersUpdated[] = $user;
         }
-
 
         return $this->render(
             'ProjectManagerScheduleBundle:Schedule:index.html.twig',
