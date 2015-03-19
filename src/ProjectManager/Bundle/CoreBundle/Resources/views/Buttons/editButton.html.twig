@@ -1,19 +1,5 @@
-{% set edit_btn_href = "" %}
-{% if object_url is defined %}
-    {% set edit_btn_href = 'href=' ~ object_url %}
-{% endif %}
-
-{% set edit_btn_id = "" %}
-{% if btn_id is defined %}
-    {% set edit_btn_id = 'id=' ~ btn_id %}
-{% endif %}
-
-{% set edit_btn_classes = "" %}
-{% if btn_classes is defined %}
-    {% set edit_btn_classes = btn_classes %}
-{% endif %}
-
-<a class="btn btn-primary pm_edit_btn {{ edit_btn_classes }}" {{ edit_btn_href }} {{ edit_btn_id }}>
+<a class="btn btn-primary pm_edit_btn {{ btn_classes|default("") }}"
+        {{ object_url is defined ? 'href=' ~ object_url : '' }} {{ btn_id is defined ? 'id=' ~ btn_id : '' }}>
     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
     {{ 'buttons.edit'|trans }}
 </a>
