@@ -31,5 +31,7 @@ class ProjectManagerScheduleExtension extends Extension
         $loader->load('services.yml');
 
         $container->setParameter('pm_first_weekday', $config['first_weekday']);
+        $container->setParameter('pm_non_working_days', $config['non_working_days']);
+        $container->setParameter('pm_display_non_working_days', $config['display_non_working_days']);
     }
 }

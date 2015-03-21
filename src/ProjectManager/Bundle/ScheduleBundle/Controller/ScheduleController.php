@@ -28,12 +28,15 @@ class ScheduleController extends AbstractController
             $usersUpdated[] = $user;
         }
 
+        $nonWorkingDays = $this->container->getParameter('pm_non_working_days');
+
         return $this->render(
             'ProjectManagerScheduleBundle:Schedule:index.html.twig',
             array(
                 'week' => $weekNumber,
                 'users' => $usersUpdated,
                 'week_info' => $weekInfo,
+                'non_working_days' => $nonWorkingDays,
             )
         );
     }

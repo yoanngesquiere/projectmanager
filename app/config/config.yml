@@ -74,3 +74,5 @@ swiftmailer:
 
 project_manager_schedule:
     first_weekday: 1
+    display_non_working_days: true
+    non_working_days: [ 6, 0 ]

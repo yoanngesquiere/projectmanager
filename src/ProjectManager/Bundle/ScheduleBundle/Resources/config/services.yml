@@ -1,7 +1,9 @@
 parameters:
     - pm_first_weekday
+    - pm_non_working_days
+    - pm_display_non_working_days
 
 services:
     pm_date_helper:
         class: ProjectManager\Bundle\ScheduleBundle\Helper\DateHelper
-        arguments: [%pm_first_weekday%]
+        arguments: [%pm_first_weekday%, %pm_non_working_days%, %pm_display_non_working_days%]

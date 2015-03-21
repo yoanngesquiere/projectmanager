@@ -9,10 +9,14 @@ class DateHelper
     const SATURDAY = 6;
 
     private $firstWeekday;
+    private $nonWorkingDays;
+    private $displayNonWorkingDays;
 
-    public function __construct($firstWeekday)
+    public function __construct($firstWeekday, $nonWorkingDays, $displayNonWorkingDays)
     {
         $this->firstWeekday = $firstWeekday;
+        $this->nonWorkingDays = $nonWorkingDays;
+        $this->displayNonWorkingDays = $displayNonWorkingDays;
     }
 
     private function getDayInfoInWeek($dayNum, $firstDay, $firstDayNum)
@@ -31,6 +35,13 @@ class DateHelper
             'date' => date('Y-m-d',strtotime("+".$diffWithFirstDay." days", strtotime($firstDay))),
             'day_added' => $dayAdded,
         );
+    }
+
+    private function isDayDisplayable($dayNumber)
+    {
+        // A displayable day is a working day if we choose to display only the working days
+        // otherwise, all days are displayable
+        return !in_array($dayNumber, $this->nonWorkingDays) || $this->displayNonWorkingDays;
     }
 
     public function getCurrentWeekInfo()
@@ -52,12 +63,16 @@ class DateHelper
 
         // Manages the days to the first day of the week to the max value for the days (saturday)
         for ($i = $this->firstWeekday; $i <= self::SATURDAY; $i++) {
-            $weekInfo['week_days'][] = $this->getDayInfoInWeek($i, $firstDayOnCalendar, $this->firstWeekday);
+            if ($this->isDayDisplayable($i)) {
+                $weekInfo['week_days'][] = $this->getDayInfoInWeek($i, $firstDayOnCalendar, $this->firstWeekday);
+            }
         }
 
         // Manages the other days (From sunday to the day before the first day of the week)
         for ($i = self::SUNDAY; $i <= ($this->firstWeekday - 1); $i++) {
-            $weekInfo['week_days'][] = $this->getDayInfoInWeek($i, $firstDayOnCalendar, $this->firstWeekday);
+            if ($this->isDayDisplayable($i)) {
+                $weekInfo['week_days'][] = $this->getDayInfoInWeek($i, $firstDayOnCalendar, $this->firstWeekday);
+            }
         }
 
         return $weekInfo;

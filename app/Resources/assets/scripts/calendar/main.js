@@ -10,38 +10,46 @@ function addEvent(obj, event, fct) {
  * Function used to fill the calendar with the tasks assigned to the displayed users
  */
 function updateCalendar(checkedElementsClass, excludeColumnCriteria, columnClassPrefix) {
-    //Initialize columnsData from calendar
+    // Initialize columnsData from calendar
     var columns = $(".week_calendar_header");
     var columnsData = new Array();
     for (j = 0; j < columns.length; j++) {
         var columnClass = columns[j].className.trim();
-        //Some columns must not be checked because it is not part of the calendar itself
-        if(columnClass.indexOf(excludeColumnCriteria) > 0) {
+        // Some columns must not be checked because they must not be used to display tasks
+        var displayColumn = true;
+        for (var index=0; index<excludeColumnCriteria.length; index++) {
+            if (columnClass.indexOf(excludeColumnCriteria[index]) > -1) {
+                displayColumn = false;
+            }
+        }
+        if(!displayColumn) {
             continue;
         }
+
+        // Get the day associated to the current column
         var startDayClass = columnClass.indexOf(columnClassPrefix);
         var endDayClass = columnClass.indexOf(" ", columnClass.indexOf(columnClassPrefix));
         if (endDayClass < startDayClass) {
-            endDayClass = columnClass.length
+            endDayClass = columnClass.length;
         }
         var dayClass = columnClass.substring(startDayClass, endDayClass);
         var columnDay = dayClass.substring(columnClassPrefix.length);
         columnsData[columnDay] = columns[j].id.substring(6);
     }
 
-    //Process each user's line
+    // Process each user's line
     $( "."+checkedElementsClass ).each(function(  ) {
-        //Get user information
+        // Get user information
         var elementId = $( this ).attr('id');
         var userId = elementId.substring(elementId.indexOf('_')+1, elementId.lastIndexOf('_'));
         var tasksContent = $( this ).html().trim();
-        //Triggers the process only when the user has at least one task for the current calendar
+        // Triggers the process only when the user has at least one task for the current calendar
         if ("" != tasksContent) {
             var tasks = tasksContent.split('\n');
             var currentTask = null;
             var process = false;
             for (i = 0; i < tasks.length; i++) {
-                //Manage JSON entities on multiple lines
+                // Manage JSON entities on multiple lines
                 if (tasks[i].indexOf("{")>=0 && tasks[i].indexOf("}")>=0) {
                     currentTask = tasks[i];
                     process = true;
@@ -53,6 +61,8 @@ function updateCalendar(checkedElementsClass, excludeColumnCriteria, columnClass
                 } else {
                     currentTask += tasks[i];
                 }
+
+                // When the JSON string is complete, we can use it as an object
                 if (process) {
                     var task = JSON.parse(currentTask);
                     for (j = 0; j < columnsData.length; j++) {
@@ -72,4 +82,5 @@ function updateCalendar(checkedElementsClass, excludeColumnCriteria, columnClass
     });
 }
 
-addEvent(window , "load", updateCalendar("user_tasks", "calendar_users", "day_"));
+var excludeColumnsWithClass = ['calendar_users', 'non_working_day'];
+addEvent(window , "load", updateCalendar("user_tasks", excludeColumnsWithClass, "day_"));
