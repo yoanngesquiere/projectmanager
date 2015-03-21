@@ -8,6 +8,13 @@ class DateHelper
     const SUNDAY = 0;
     const SATURDAY = 6;
 
+    private $firstWeekday;
+
+    public function __construct($firstWeekday)
+    {
+        $this->firstWeekday = $firstWeekday;
+    }
+
     private function getDayInfoInWeek($dayNum, $firstDay, $firstDayNum)
     {
         $diffWithFirstDay = $dayNum - $firstDayNum;
@@ -32,12 +39,9 @@ class DateHelper
         $weekInfo['week_number'] = date("W");
         $weekInfo['week_days'] = array();
 
-        // Will be a parameter soon
-        $firstDayOfWeek = 1;
-
         // The diff with first day allows to know the date of the first day
         $dayOfWeek = date("w");
-        $diffWithFirstDay = $dayOfWeek - $firstDayOfWeek;
+        $diffWithFirstDay = $dayOfWeek - $this->firstWeekday;
 
         // When sunday isn't the first day of the week
         if ($diffWithFirstDay < self::SUNDAY) {
@@ -47,13 +51,13 @@ class DateHelper
         $firstDayOnCalendar = date('Y-m-d',strtotime("-".$diffWithFirstDay." days"));
 
         // Manages the days to the first day of the week to the max value for the days (saturday)
-        for ($i = $firstDayOfWeek; $i <= self::SATURDAY; $i++) {
-            $weekInfo['week_days'][] = $this->getDayInfoInWeek($i, $firstDayOnCalendar, $firstDayOfWeek);
+        for ($i = $this->firstWeekday; $i <= self::SATURDAY; $i++) {
+            $weekInfo['week_days'][] = $this->getDayInfoInWeek($i, $firstDayOnCalendar, $this->firstWeekday);
         }
 
         // Manages the other days (From sunday to the day before the first day of the week)
-        for ($i = self::SUNDAY; $i <= ($firstDayOfWeek - 1); $i++) {
-            $weekInfo['week_days'][] = $this->getDayInfoInWeek($i, $firstDayOnCalendar, $firstDayOfWeek);
+        for ($i = self::SUNDAY; $i <= ($this->firstWeekday - 1); $i++) {
+            $weekInfo['week_days'][] = $this->getDayInfoInWeek($i, $firstDayOnCalendar, $this->firstWeekday);
         }
 
         return $weekInfo;

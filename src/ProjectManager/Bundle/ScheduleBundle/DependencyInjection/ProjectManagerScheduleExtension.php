@@ -22,7 +22,14 @@ class ProjectManagerScheduleExtension extends Extension
         $configuration = new Configuration();
         $this->processConfiguration($configuration, $configs);
 
+        $config = array();
+        foreach ($configs as $subConfig) {
+            $config = array_merge($config, $subConfig);
+        }
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setParameter('pm_first_weekday', $config['first_weekday']);
     }
 }

@@ -11,8 +11,8 @@ class ScheduleController extends AbstractController
     {
         $weekNumber = date("W");
 
-        $dateHelper = new DateHelper();
-        $weekInfo = $dateHelper->getCurrentWeekInfo();
+        $dateService = $this->container->get("pm_date_helper");
+        $weekInfo = $dateService->getCurrentWeekInfo();
 
         $users = $this->getRepository('ProjectManagerUserBundle:User')->findAll();
         $usersUpdated = array();

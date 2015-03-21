@@ -18,7 +18,12 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('project_manager_schedule');
+        $treeBuilder->root('project_manager_schedule')->children()
+            ->integerNode('first_weekday')
+                ->defaultValue(1)
+                ->min(0)
+                ->max(6)
+            ->end();
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

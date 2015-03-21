@@ -1,4 +1,7 @@
+parameters:
+    - pm_first_weekday
+
 services:
-#    project_manager_schedule.example:
-#        class: ProjectManager\Bundle\ScheduleBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    pm_date_helper:
+        class: ProjectManager\Bundle\ScheduleBundle\Helper\DateHelper
+        arguments: [%pm_first_weekday%]
