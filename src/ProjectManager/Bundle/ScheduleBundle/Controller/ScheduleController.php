@@ -3,7 +3,6 @@
 namespace ProjectManager\Bundle\ScheduleBundle\Controller;
 
 use ProjectManager\Bundle\CoreBundle\Controller\AbstractController;
-use ProjectManager\Bundle\ScheduleBundle\Helper\DateHelper;
 
 class ScheduleController extends AbstractController
 {
