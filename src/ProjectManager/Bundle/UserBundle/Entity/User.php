@@ -59,6 +59,12 @@ class User implements UserInterface, \Serializable
      */
     protected $team;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ProjectManager\Bundle\ProjectBundle\Entity\Task", mappedBy="assignedTo")
+     */
+    private $assignedTasks;
+
+
     public function __construct()
     {
         $this->active = true;
@@ -320,5 +326,21 @@ class User implements UserInterface, \Serializable
      */
     public function eraseCredentials()
     {
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAssignedTasks()
+    {
+        return $this->assignedTasks;
+    }
+
+    /**
+     * @param mixed $assignedTasks
+     */
+    public function setAssignedTasks($assignedTasks)
+    {
+        $this->assignedTasks = $assignedTasks;
     }
 }

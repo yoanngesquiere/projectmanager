@@ -3,7 +3,6 @@
 namespace ProjectManager\Bundle\ScheduleBundle\Controller;
 
 use ProjectManager\Bundle\CoreBundle\Controller\AbstractController;
-use ProjectManager\Bundle\ProjectBundle\Entity\Worker;
 use ProjectManager\Bundle\ScheduleBundle\Helper\DateHelper;
 
 class ScheduleController extends AbstractController
@@ -20,7 +19,6 @@ class ScheduleController extends AbstractController
 
         foreach($users as $user)
         {
-            $user = new Worker($user);
             $user->setAssignedTasks($this->getRepository('ProjectManagerProjectBundle:Task')
                 ->getTasksForPeriod(
                     array_values($weekInfo['week_days'])[0]['date'],
