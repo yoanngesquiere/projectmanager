@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-Week : {{ week }}
+Week : {{ week_info.week_number }}
 <div id="content">
     <table id="calendar" class="table table-striped">
         <thead>
@@ -10,7 +10,7 @@ Week : {{ week }}
                     Users
                 </td>
                 {% for day in week_info.week_days %}
-                    <td class="week_calendar_header day_{{ day['day_number'] }} {{ day['day_number'] in non_working_days ? "non_" : "" }}working_day"
+                    <td class="week_calendar_header day_{{ day['day_number'] }} {{ day['working_day'] ? "" : "non_" }}working_day"
                         id="column{{ day['date']|date("ymd") }}">
                         {{ ('days.'~day['day_number'])|trans }}
                         {{ day['date']|date("d/m/y") }}
@@ -31,7 +31,7 @@ Week : {{ week }}
                     </div>
                 </td>
                 {% for day in week_info.week_days %}
-                <td class="day_{{ day['day_number'] }} {{ day['day_number'] in non_working_days ? "non_" : "" }}working_day">
+                <td class="day_{{ day['day_number'] }} {{ day['working_day'] ? "" : "non_" }}working_day">
                 </td>
                 {% endfor %}
             </tr>

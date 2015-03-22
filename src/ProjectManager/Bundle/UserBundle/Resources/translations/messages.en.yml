@@ -11,6 +11,7 @@ user:
     actions: Actions
     list: User list
     new: New user
+    select: Choose a user
     form:
         username: Username
         password: Password

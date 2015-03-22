@@ -11,6 +11,7 @@ user:
     actions: Actions
     list: Liste d'utilisateurs
     new: Nouvel utilisateur
+    select: Choisissez un utilisateur
     form:
         username: Nom d'utilisateur
         password: Mot de passe

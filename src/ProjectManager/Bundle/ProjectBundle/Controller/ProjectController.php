@@ -46,7 +46,7 @@ class ProjectController extends AbstractController
             $em->persist($project);
             $em->flush();
 
-            return $this->redirect($this->generateUrl(self::BASE_URL.'_list'));
+            return $this->redirect($this->generateUrl(self::BASE_URL.'_edit', array('id' => $project->getId())));
         }
 
         return array(

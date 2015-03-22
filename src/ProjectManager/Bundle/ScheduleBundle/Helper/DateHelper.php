@@ -29,11 +29,16 @@ class DateHelper
             $diffWithFirstDay += 7;
             $dayAdded = 7;
         }
+        $workingDay = true;
+        if(in_array($dayNum, $this->nonWorkingDays)) {
+            $workingDay = false;
+        }
 
         return array(
             'day_number' => $dayNum,
             'date' => date('Y-m-d',strtotime("+".$diffWithFirstDay." days", strtotime($firstDay))),
             'day_added' => $dayAdded,
+            'working_day' => $workingDay,
         );
     }
 
