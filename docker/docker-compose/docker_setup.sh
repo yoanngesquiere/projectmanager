@@ -2,7 +2,7 @@
 echo "Symfony Installation : Start"
 # Get the container address at startup
 cp app/config/parameters.yml.dist app/config/parameters.yml
-sed -i -e "s/database_host:.*/database_host: $PROJECTMANAGER_DB_1_PORT_3306_TCP_ADDR/" app/config/parameters.yml
+sed -i -e "s/database_host:.*/database_host: $DOCKERCOMPOSE_DB_1_PORT_3306_TCP_ADDR/" app/config/parameters.yml
 # Clear cache avoiding permission problems in the new container
 rm -rf app/cache
 # Classic symfony install

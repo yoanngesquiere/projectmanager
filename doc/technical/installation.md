@@ -7,7 +7,7 @@ Project manager is a Symfony2 app, so the requirements are the same as the Symfo
 (see [Symony2 requirements] (http://symfony.com/doc/current/reference/requirements.html))
 
 
-In order to install the project manager, you need to clone the project.
+In order to install the Project manager, you need to clone the project.
 ```sh
 git clone https://github.com/yoanngesquiere/projectmanager.git
 ```
@@ -48,5 +48,11 @@ And that's it. Project Manager is now installed.
 
 # Docker project installation
 
-If you have docker (>= 1.3) and fig, it's even simpler: just launch ``` ./start-in-docker.sh```, wait during the installation,
-then open your web browser at the ip address that is shown at the end of the script execution so you can see the application.
+If you have docker (>= 1.3), you can use it to run the Project manager.  
+The script ``` ./start-in-docker.sh``` does all it needs to build and run the images and the containers.  
+If you want to use a single image that is not linked to your filesystem, run ``` ./start-in-docker.sh baseimage```.  
+If you want to use docker-compose to have two separate images linked to your filesystem (really convenient to develop),
+run ``` ./start-in-docker.sh compose```.  
+In the two cases, you will have to wait during the installation. At the end, an IP address it shown.
+You can paste it into your browser and start using the Project manager.
+

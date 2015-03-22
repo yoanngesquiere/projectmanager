@@ -4,6 +4,6 @@ web:
   links:
     - db
   volumes:
-    - .:/var/www
+    - ../..:/var/www
 db:
   image: dockerfile/mariadb:latest
