@@ -1,29 +1,24 @@
 pm_project_task_list:
     path:     /project/{projectId}/task
     defaults: { _controller: ProjectManagerProjectBundle:Task:index }
-    requirements:
-        _method:  GET
+    methods:  [GET]
 
 pm_project_task_delete:
     path:     /project/{projectId}/task/{id}
     defaults: { _controller: ProjectManagerProjectBundle:Task:delete }
-    requirements:
-        _method:  DELETE
+    methods:  [DELETE]
 
 pm_project_task_add:
     path:     /project/{projectId}/task/new
     defaults: { _controller: ProjectManagerProjectBundle:Task:new }
-    requirements:
-        _method:  GET|POST
+    methods:  [GET,POST]
 
 pm_project_task_edit_by_project:
     path:     /project/{projectId}/task/{taskId}
     defaults: { _controller: ProjectManagerProjectBundle:Task:edit }
-    requirements:
-        _method:  GET|POST
+    methods:  [GET,POST]
 
 pm_project_task_edit:
     path:     /project/task/{taskId}
     defaults: { _controller: ProjectManagerProjectBundle:Task:edit }
-    requirements:
-        _method:  GET|POST
+    methods:  [GET,POST]

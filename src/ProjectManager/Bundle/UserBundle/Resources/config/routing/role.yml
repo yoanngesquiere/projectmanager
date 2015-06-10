@@ -1,23 +1,19 @@
 pm_user_role_edit:
     path:     /role/{id}/edit/
     defaults: { _controller: ProjectManagerUserBundle:Role:edit }
-    requirements:
-        _method:  GET|POST
+    methods:  [GET, POST]
 
 pm_user_role_add:
     path:     /role/new
     defaults: { _controller: ProjectManagerUserBundle:Role:edit }
-    requirements:
-        _method:  GET|POST
+    methods:  [GET, POST]
 
 pm_user_role_list:
     path:     /role/
     defaults: { _controller: ProjectManagerUserBundle:Role:index }
-    requirements:
-        _method:  GET
+    methods:  [GET]
 
 pm_user_role_delete:
     path:     /role/{id}
     defaults: { _controller: ProjectManagerUserBundle:Role:delete }
-    requirements:
-        _method:  DELETE
+    methods:  [DELETE]

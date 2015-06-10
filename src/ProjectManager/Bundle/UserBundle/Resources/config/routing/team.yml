@@ -1,65 +1,54 @@
 pm_user_team_list:
     path:     /team/
     defaults: { _controller: ProjectManagerUserBundle:Team:index }
-    requirements:
-        _method:  GET
+    methods:  [GET]
 
 pm_user_team_add:
     path:     /team/new/
     defaults: { _controller: ProjectManagerUserBundle:Team:new }
-    requirements:
-        _method:  GET
+    methods:  [GET]
 
 pm_user_team_create:
     path:     /team/
     defaults: { _controller: ProjectManagerUserBundle:Team:create }
-    requirements:
-        _method:  POST
+    methods:  [POST]
 
 pm_user_team_edit:
     path:     /team/{id}/edit/
     defaults: { _controller: ProjectManagerUserBundle:Team:edit }
-    requirements:
-        _method:  GET
+    methods:  [GET]
 
 pm_user_team_update:
     path:     /team/{id}/
     defaults: { _controller: ProjectManagerUserBundle:Team:update }
-    requirements:
-        _method:  PUT
+    methods:  [PUT]
 
 pm_user_team_delete:
     path:     /team/{id}/
     defaults: { _controller: ProjectManagerUserBundle:Team:delete }
-    requirements:
-        _method:  DELETE
+    methods:  [DELETE]
 
 pm_user_teammember_list:
     path:     /teammember/{teamId}/list/
     defaults: { _controller: ProjectManagerUserBundle:TeamMember:list }
-    requirements:
-        _method:  GET
+    methods:  [GET]
 
 pm_user_teammember_list_not_in_team:
     path:     /teammember/{teamId}/notInlist/
     defaults: { _controller: ProjectManagerUserBundle:TeamMember:listNotInTeam }
-    requirements:
-        _method:  GET
+    methods:  [GET]
 
 pm_user_teammember_team_member_add_members:
     path:     /teammember/{teamId}/add_members/
     defaults: { _controller: ProjectManagerUserBundle:TeamMember:addMembersToTeam }
-    requirements:
-        _method:  GET|POST
+    methods:  [GET,POST]
 
 pm_user_teammember_delete_member:
     path:     /teammember/{teamId}/{id}/
     defaults: { _controller: ProjectManagerUserBundle:TeamMember:deleteMember }
-    requirements:
-        _method:  DELETE
+    methods:  [DELETE]
 
 pm_user_teammember_update_roles:
     path:     /teammember/{teamId}/{userId}/update_roles/
     defaults: { _controller: ProjectManagerUserBundle:TeamMember:updateRolesForUserInTeam }
-    requirements:
-        _method:  PUT
+    methods:  [PUT]

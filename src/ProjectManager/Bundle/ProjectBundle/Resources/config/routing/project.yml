@@ -1,23 +1,19 @@
 pm_project_project_list:
     path:     /project/
     defaults: { _controller: ProjectManagerProjectBundle:Project:index }
-    requirements:
-        _method:  GET
+    methods:  [GET]
 
 pm_project_project_add:
     path:     /project/new
     defaults: { _controller: ProjectManagerProjectBundle:Project:new }
-    requirements:
-        _method:  GET|POST
+    methods:  [GET, POST]
 
 pm_project_project_delete:
     path:     /project/{id}
     defaults: { _controller: ProjectManagerProjectBundle:Project:delete }
-    requirements:
-        _method:  DELETE
+    methods:  [DELETE]
 
 pm_project_project_edit:
     path:     /project/{id}
     defaults: { _controller: ProjectManagerProjectBundle:Project:edit }
-    requirements:
-        _method:  GET|POST
+    methods:  [GET,POST]

@@ -1,5 +1,4 @@
 pm_schedule_homepage:
     path:     /
     defaults: { _controller: ProjectManagerScheduleBundle:Schedule:index }
-    requirements:
-        _method:  GET
+    methods:  [GET]
