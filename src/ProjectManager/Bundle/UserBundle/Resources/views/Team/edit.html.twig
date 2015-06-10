@@ -13,7 +13,7 @@
     </li>
 </ul>
 {# Shows the team members #}
-{% render(controller('ProjectManagerUserBundle:TeamMember:list', { 'teamId': team.id })) %}
+{{ render(controller('ProjectManagerUserBundle:TeamMember:list', { 'teamId': team.id })) }}
 {# Shows members that are not in the team yet #}
-{% render(controller('ProjectManagerUserBundle:TeamMember:listNotInTeam', { 'teamId': team.id })) %}
+{{ render(controller('ProjectManagerUserBundle:TeamMember:listNotInTeam', { 'teamId': team.id })) }}
 {% endblock %}

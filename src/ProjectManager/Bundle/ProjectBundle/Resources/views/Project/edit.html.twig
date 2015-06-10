@@ -6,5 +6,5 @@
 
 {% block body %}
     {{ parent() }}
-    {% render(controller('ProjectManagerProjectBundle:Task:index', { 'projectId': project.id })) %}
+    {{ render(controller('ProjectManagerProjectBundle:Task:index', { 'projectId': project.id })) }}
 {% endblock %}
