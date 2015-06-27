@@ -12,7 +12,6 @@ Feature: Project Management
 
   Scenario: Project Creation
     Given I am on "/project"
-    Then I should see "Team Management"
     And I follow "New project"
     And I should not see "Behat Project"
     And I fill:
@@ -32,7 +31,7 @@ Feature: Project Management
 
   @javascript
   Scenario: Project Deletion
-    Given I am on "/project"
+    Given I am on "/web/app_dev.php/project"
     And I press "Delete" in "tr" with element "td" "Behat Project Edit"
     And I wait for the modal
     And I press "Delete" in the modal

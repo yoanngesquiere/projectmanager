@@ -43,7 +43,7 @@ class UserController extends AbstractController
         }
 
         $form = $this->createForm(new UserType(), $person, array('user_exists' => ($id > 0)))
-            ->add('save', 'submit');
+            ->add('save', 'submit', array('label' => 'user.form.save'));
 
         $form->handleRequest($request);
 

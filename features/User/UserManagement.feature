@@ -44,7 +44,7 @@ Feature: User Management
 
   @javascript
   Scenario: User Delete:
-   	Given I am on "/user"
+   	Given I am on "/web/app_dev.php/user"
    	And I press "Delete" in "tr" with element "td" "Behat First Name Edit"
     And I wait for the modal
     And I press "Delete" in the modal

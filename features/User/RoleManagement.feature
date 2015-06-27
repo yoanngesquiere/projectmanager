@@ -11,7 +11,6 @@ Feature: Role Management
 
   Scenario: Role Creation
     Given I am on "/role"
-    Then I should see "Role Management"
     And I follow "New role"
     And I should not see "Behat Role"
     And I fill:
@@ -31,7 +30,7 @@ Feature: Role Management
 
   @javascript
   Scenario: Role Deletion
-    Given I am on "/role"
+    Given I am on "/web/app_dev.php/role"
     And I press "Delete" in "tr" with element "td" "Behat Role Edit"
     And I wait for the modal
     And I press "Delete" in the modal

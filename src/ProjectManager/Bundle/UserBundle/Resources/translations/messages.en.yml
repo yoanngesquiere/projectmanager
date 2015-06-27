@@ -18,6 +18,7 @@ user:
         firstName: First name
         lastName: Last name
         email: Email
+        save: Save
 
 role:
     form:

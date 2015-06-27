@@ -38,7 +38,7 @@ Feature: Team Management
 
   @javascript
   Scenario: Team Deletion
-    Given I am on "/team"
+    Given I am on "/web/app_dev.php/team"
     And I press "Delete" in "tr" with element "td" "Behat Team Edit"
     And I wait for the modal
     And I press "Delete" in the modal
