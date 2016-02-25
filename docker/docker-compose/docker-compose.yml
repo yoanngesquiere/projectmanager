@@ -6,4 +6,4 @@ web:
   volumes:
     - ../..:/var/www
 db:
-  image: dockerfile/mariadb:latest
+  image: mariadb:latest

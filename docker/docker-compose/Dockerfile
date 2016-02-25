@@ -14,7 +14,7 @@ RUN apt-get install -y firefox-mozilla-build
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 RUN curl -sL https://deb.nodesource.com/setup | bash -
-RUN apt-get install -y nodejs nodejs-legacy
+RUN apt-get install -y nodejs
 RUN apt-get install -y openjdk-7-jre
 RUN wget http://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar
 
